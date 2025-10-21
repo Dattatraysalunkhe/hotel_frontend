@@ -46,7 +46,7 @@ function SignIn() {
       aria-label="Sign in page background"
     >
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black opacity-60"></div>
+      <div className="absolute inset-0"></div>
 
       {/* Form container */}
       <div className="relative z-10 bg-white bg-opacity-90 rounded-3xl shadow-xl max-w-md w-full p-10 flex flex-col">
