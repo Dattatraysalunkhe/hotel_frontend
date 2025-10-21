@@ -69,7 +69,7 @@ function Header() {
         {/* Logo */}
         <Link to="/" className="select-none">
           <h1 className="text-xl font-light tracking-wide">
-            <span className="text-blue-500 font-semibold">Sky</span>
+            <span className="text-[#00008B] font-semibold">SkyHotel</span>
             <span className="text-gray-700">.com</span>
           </h1>
         </Link>
