@@ -1,16 +1,14 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { signInStart ,signInSuccess,signInFailure } from '../redux/user/userSlice'
+import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice'
+import heroImage from '../assets/hero1.jpg'; // Adjust path as needed
 
 function SignIn() {
   const [formData, setFormData] = useState({})
- const {loading ,error} = useSelector((state) => state.user)
-  const navigate =useNavigate()
-
-  
-
-  const dispatch=useDispatch()
+  const { loading, error } = useSelector((state) => state.user)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleChange = (e) => {
     setFormData({
@@ -20,54 +18,80 @@ function SignIn() {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-
       dispatch(signInStart())
-    const res = await fetch('/api/auth/signin', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
+      const res = await fetch('/api/auth/signin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
 
-    const data = await res.json();
-    if(data.success === false){
-      dispatch(signInFailure(data.message))
-      return;
-    }
-    dispatch(signInSuccess(data))
-    console.log(data)
-    navigate('/')
-      
+      const data = await res.json()
+      if (data.success === false) {
+        dispatch(signInFailure(data.message))
+        return
+      }
+      dispatch(signInSuccess(data))
+      navigate('/')
     } catch (error) {
-      
-      dispatch(signInFailure(error.message));
+      dispatch(signInFailure(error.message))
     }
-    
-      
   }
 
-  
-
   return (
-    <div className='p-3 max-w-lg mx-auto mt-52'>
-      <h1 className='text-2xl text-center font-medium mb-16'>Sign In</h1>
-      <form className='flex flex-col gap-6 ' onSubmit={handleSubmit}>
-        <input type='email' placeholder='Email' className='border p-2 rounded-xl shadow-md' id='email' onChange={handleChange} />
-        <input type='password' placeholder='Password' className='border p-2 rounded-xl shadow-md' id='password' onChange={handleChange} />
-        <button disabled={loading} className='p-3 text-slate-100 bg-blue-400 hover:text-slate-100 font-medium  rounded-xl uppercase hover:opacity-75 disabled:opacity-80'>
-          {loading ? 'Loading' : 'Sign In'}
+    <div
+      className="min-h-screen flex items-center justify-center bg-cover bg-center relative"
+      style={{ backgroundImage: `url(${heroImage})` }}
+      aria-label="Sign in page background"
+    >
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black opacity-60"></div>
+
+      {/* Form container */}
+      <div className="relative z-10 bg-white bg-opacity-90 rounded-3xl shadow-xl max-w-md w-full p-10 flex flex-col">
+        <h1 className="text-3xl font-extralight text-gray-800 mb-10 text-center tracking-wide">
+          Welcome Back
+        </h1>
+        <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
+          <input
+            type="email"
+            id="email"
+            placeholder="Email"
+            onChange={handleChange}
+            className="border border-gray-300 rounded-xl px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-light text-sm shadow-sm"
+            required
+          />
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            onChange={handleChange}
+            className="border border-gray-300 rounded-xl px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-light text-sm shadow-sm"
+            required
+          />
+          <button
+            type="submit"
+            disabled={loading}
+            className="bg-blue-600 text-white py-3 rounded-xl font-semibold text-sm tracking-wide hover:bg-blue-700 transition disabled:opacity-70"
+          >
+            {loading ? 'Signing In...' : 'Sign In'}
           </button>
-      </form>
-      <div className='flex gap-3 mt-8'>
-        <p className='font-medium'>Craete an Account..?</p>
-        <Link to='/Sign-up'>
-          <span className='text-blue-800 font-medium'>Sign Up</span>
-        </Link>
+        </form>
+
+        <p className="mt-8 text-center text-gray-600 font-light text-sm">
+          Don’t have an account?{' '}
+          <Link to="/Sign-up" className="text-blue-600 font-medium hover:underline">
+            Sign Up
+          </Link>
+        </p>
+
+        {error && (
+          <p className="mt-4 text-center text-red-600 font-medium text-sm" role="alert">
+            {error}
+          </p>
+        )}
       </div>
-      {error && <p className='text-red-600'>{error}</p>}
     </div>
   )
 }

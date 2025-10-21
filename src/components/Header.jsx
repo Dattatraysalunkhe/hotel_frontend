@@ -16,7 +16,6 @@ function Header() {
   const headerRef = useRef(null);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event) {
       if (headerRef.current && !headerRef.current.contains(event.target)) {
@@ -27,15 +26,13 @@ function Header() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Parse searchTerm from URL on mount and when location changes
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const searchTermFromUrl = urlParams.get('searchTerm') || '';
     setSearchTerm(searchTermFromUrl);
-  }, [window.location.search]); // This is fine, though React may warn - usually you can use a location hook
+  }, [window.location.search]);
 
   useEffect(() => {
-    // Animate header background & shadow on scroll
     ScrollTrigger.create({
       trigger: headerRef.current,
       start: "top top",
@@ -60,7 +57,7 @@ function Header() {
     await fetch('/api/auth/signout');
     dispatch(signInSuccess());
     setUserMenuOpen(false);
-    navigate('/'); // Redirect to home or sign-in after logout
+    navigate('/');
   };
 
   return (
@@ -77,37 +74,57 @@ function Header() {
         {/* Search */}
         <form
           onSubmit={handleSubmit}
-          className="flex items-center bg-gray-100 rounded-full px-3 py-1 shadow-inner max-w-full sm:max-w-md"
+          className="relative max-w-md w-full"
           role="search"
           aria-label="Site search"
         >
           <input
             type="search"
-            placeholder="Search..."
-            className="bg-transparent focus:outline-none text-sm px-2 text-gray-700 w-24 sm:w-48 md:w-full placeholder-gray-400"
+            placeholder="Search hotels, cities..."
+            className="w-full pl-4 pr-10 py-2 rounded-full border border-gray-300 focus:border-blue-700 focus:ring-2 focus:ring-blue-700 focus:outline-none text-gray-700 text-sm"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             aria-label="Search input"
           />
-          <button type="submit" className="text-gray-500 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-full p-1" aria-label="Submit search">
-            <FaSearch className="text-sm" />
+          <button
+            type="submit"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 rounded-full p-1"
+            aria-label="Submit search"
+          >
+            <FaSearch className="text-lg" />
           </button>
         </form>
 
         {/* Navigation */}
         <nav>
           <ul className="flex items-center gap-5 text-gray-700 font-light select-none">
-            <li><Link to="/" className="hover:text-blue-500 transition cursor-pointer">Home</Link></li>
-            <li><Link to="/Hotels" className="hover:text-blue-500 transition cursor-pointer">Hotels</Link></li>
-            <li><Link to="/My/bookings" className="hover:text-blue-500 transition cursor-pointer">Bookings</Link></li>
-            <li><Link to="/About" className="hover:text-blue-500 transition cursor-pointer">About</Link></li>
+            <li>
+              <Link to="/" className="hover:text-blue-700 transition cursor-pointer ">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/Hotels" className="hover:text-blue-700 transition cursor-pointer">
+                Hotels
+              </Link>
+            </li>
+            <li>
+              <Link to="/My/bookings" className="hover:text-blue-700 transition cursor-pointer">
+                Bookings
+              </Link>
+            </li>
+            <li>
+              <Link to="/About" className="hover:text-blue-700 transition cursor-pointer">
+                About
+              </Link>
+            </li>
 
             {/* Profile / User menu */}
             {currentUser ? (
               <li className="relative">
                 <button
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
-                  className="flex items-center gap-2 hover:text-blue-500 transition focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+                  className="flex items-center gap-2 hover:text-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-700 rounded"
                   aria-haspopup="true"
                   aria-expanded={userMenuOpen}
                   aria-label="User menu"
@@ -151,7 +168,11 @@ function Header() {
                 )}
               </li>
             ) : (
-              <li><Link to="/Profile" className="hover:text-blue-500 transition cursor-pointer">Sign In</Link></li>
+              <li>
+                <Link to="/Profile" className="hover:text-blue-700 transition cursor-pointer">
+                  Sign In
+                </Link>
+              </li>
             )}
           </ul>
         </nav>
