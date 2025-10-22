@@ -9,7 +9,7 @@ function Footer() {
         {/* Brand Info */}
         <div>
           <Link to="/" className="text-white text-2xl font-semibold tracking-wide">
-            Sky.com
+            SkyHotel.com
           </Link>
           <p className="mt-3 text-sm text-gray-400 leading-relaxed">
             Your trusted platform to find and book dream vacation homes worldwide. Luxury, comfort, and affordability at your fingertips.
@@ -52,7 +52,7 @@ function Footer() {
 
       {/* Footer Bottom Bar */}
       <div className="border-t border-gray-700 mt-10 pt-6 text-center text-xs text-gray-500">
-        © {new Date().getFullYear()} Sky.com — All rights reserved.
+        © {new Date().getFullYear()} SkyHotel.com — All rights reserved.
       </div>
     </footer>
   );

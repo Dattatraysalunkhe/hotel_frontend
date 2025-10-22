@@ -23,7 +23,11 @@ function SignIn() {
       dispatch(signInStart())
       const res = await fetch('/api/auth/signin', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json' ,
+          'x-api-key': import.meta.env.VITE_API_KEY,  // Add your API key here
+
+        },
         body: JSON.stringify(formData),
       })
 

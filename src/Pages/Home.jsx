@@ -26,7 +26,15 @@ function Home() {
   useEffect(() => {
     const fetchOfferListings = async () => {
       try {
-        const res = await fetch('/api/listing/get?type=all&limit=6');
+        // const res = await fetch('/api/listing/get?type=all&limit=6');
+        const res = await fetch('/api/listing/get?type=all&limit=6', {
+          method: 'GET', // Specify GET method
+          headers: {
+            'Content-Type': 'application/json', // Optional depending on your API requirements
+            'x-api-key': import.meta.env.VITE_API_KEY, // Add your API key here
+          },
+        })
+
         const data = await res.json();
         setOffers(data);
         fetchRentListings();
@@ -37,7 +45,14 @@ function Home() {
 
     const fetchRentListings = async () => {
       try {
-        const res = await fetch('/api/listing/get?type=sale&limit=4');
+        // const res = await fetch('/api/listing/get?type=sale&limit=4');
+        const res = await fetch('/api/listing/get?type=sale&limit=4', {
+          method: 'GET', // Specify GET method
+          headers: {
+            'Content-Type': 'application/json', // Optional depending on your API requirements
+            'x-api-key': import.meta.env.VITE_API_KEY, // Add your API key here
+          },
+        })
         const data = await res.json();
         setRentListings(data);
       } catch (error) {
@@ -102,7 +117,7 @@ function Home() {
       <section
         className="relative bg-[url('/images/hero1.jpg')] bg-cover bg-center h-screen flex items-center justify-center px-6"
         aria-label="Welcome to Perfect Stay"
-          style={{ backgroundImage: `url(${heroImage})` }}
+        style={{ backgroundImage: `url(${heroImage})` }}
       >
         <div className="absolute inset-0  bg-opacity-80"></div>
         <div className="relative max-w-3xl text-center text-[#F0F4FA] drop-shadow-lg">
@@ -183,12 +198,12 @@ function Home() {
               <p className="text-[#2A3B66] font-light">Each property is selected for elegance, comfort and experience.</p>
             </div>
             <div className="space-y-4 px-4">
-              <svg className="mx-auto h-12 w-12 text-[#00008B]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              <svg className="mx-auto h-12 w-12 text-[#00008B]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" strokeLinecap="round" strokeLinejoin="round" /></svg>
               <h3 className="text-xl font-light text-[#1A1F35]">24/7 Premium Support</h3>
               <p className="text-[#2A3B66] font-light">Dedicated service every step of your stay.</p>
             </div>
             <div className="space-y-4 px-4">
-              <svg className="mx-auto h-12 w-12 text-[#00008B]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8‑8H4"/></svg>
+              <svg className="mx-auto h-12 w-12 text-[#00008B]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8‑8H4" /></svg>
               <h3 className="text-xl font-light text-[#1A1F35]">Exclusive Value</h3>
               <p className="text-[#2A3B66] font-light">Unbeatable service with unmatched value.</p>
             </div>
