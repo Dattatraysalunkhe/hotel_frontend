@@ -15,6 +15,8 @@ import Footer from './components/Footer'
 import Hotels from './Pages/Hotels'
 import Booking from './Pages/Booking'
 import BookingsPage from './Pages/BookingsPage'
+import Termsconditions from './Pages/Termsconditions'
+import Privacypolicy from './Pages/privacypolicy'
 
 function App() {
   return (
@@ -35,6 +37,8 @@ function App() {
              <Route path='/listing/:listingId' element={<Listing/>}/>
              <Route path='/search' element={<Search/>}/>
              <Route path='/Hotels' element={<Hotels/>}/>
+             <Route path='/terms&conditions' element={<Termsconditions/>}/>
+             <Route path='/privac&ypolicy' element={<Privacypolicy/>}/>
              
         </Routes>
         <Footer/>
