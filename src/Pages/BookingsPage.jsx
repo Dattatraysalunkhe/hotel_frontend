@@ -5,19 +5,27 @@ function BookingsPage() {
 
     const [bookings, setBookings] = useState([])
     const [currentlisting, setCurrentlistings] = useState()
-   
+
 
     useEffect(() => {
 
         const fetchbookings = async () => {
             try {
 
-                const res = await fetch('/api/booking/booking');
+                // const res = await fetch('/api/booking/booking');
+
+                const res = await fetch('/api/booking/booking', {
+                    method: 'GET', // Specify GET method
+                    headers: {
+                        'Content-Type': 'application/json', // Optional depending on your API requirements
+                        'x-api-key': import.meta.env.VITE_API_KEY, // Add your API key here
+                    },
+                })
 
                 const data = await res.json()
 
                 setBookings(data)
-                
+
 
 
 
@@ -48,7 +56,7 @@ function BookingsPage() {
                             <div key={id}>
                                 <div>
                                     <h1>{book.name}</h1>
-                                    <h1>{}</h1>
+                                    <h1>{ }</h1>
                                 </div>
 
                             </div>

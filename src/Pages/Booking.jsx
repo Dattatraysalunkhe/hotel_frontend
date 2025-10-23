@@ -12,7 +12,7 @@ function Booking() {
         email: "",
         dateForm: "",
         dateTo: "",
-        price:0
+        price: 0
     })
 
     const dispatch = useDispatch()
@@ -22,14 +22,14 @@ function Booking() {
     const [error, setError] = useState(false);
     const params = useParams()
     const [currentListing, setCurrentListing] = useState({})
-    const[price,setPrice]=useState(
+    const [price, setPrice] = useState(
         currentListing.regularPrice
 
     )
-    const [first,setFirst]= useState()
-    const [second,setSecond]=useState()
-    const [pricechange,setPricechange] =useState(formData.price)
-    const navigate=useNavigate()
+    const [first, setFirst] = useState()
+    const [second, setSecond] = useState()
+    const [pricechange, setPricechange] = useState(formData.price)
+    const navigate = useNavigate()
 
     console.log(params)
 
@@ -37,7 +37,15 @@ function Booking() {
     useEffect(() => {
         const fetchlisting = async () => {
 
-            const res = await fetch(`/api/listing/get/${params.listingId}`);
+            // const res = await fetch(`/api/listing/get/${params.listingId}`);
+
+            const res = await fetch(`/api/listing/get/${params.listingId}`, {
+                method: 'GET', // Specify GET method
+                headers: {
+                    'Content-Type': 'application/json', // Optional depending on your API requirements
+                    'x-api-key': import.meta.env.VITE_API_KEY, // Add your API key here
+                },
+            })
 
             const data = await res.json();
             setCurrentListing(data)
@@ -46,7 +54,7 @@ function Booking() {
 
         fetchlisting()
 
-     
+
 
     }, [params.listingId])
 
@@ -61,10 +69,10 @@ function Booking() {
             })
         }
 
-       
+
     }
 
-    
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -82,7 +90,7 @@ function Booking() {
                     ...formData,
                     userref: currentUser._id,
                     hotelId: params.listingId,
-                    price:pricechange
+                    price: pricechange
                 }),
             });
             const data = await res.json();
@@ -101,40 +109,40 @@ function Booking() {
     console.log(currentListing)
     console.log(formData)
 
-   
 
 
-  useEffect(() => {
 
-     let numberOfNights = 0;
+    useEffect(() => {
 
-    let some = 0;
-    
- 
-    const one_day = 1000*60*60*24;
-    if (formData.dateForm && formData.dateTo) {
-    
-        numberOfNights = Math.ceil((new Date(formData.dateTo)-new Date(formData.dateForm))/(one_day))
+        let numberOfNights = 0;
 
-       some = (numberOfNights)*(currentListing.regularPrice)
-       setPricechange(some)
-     
-    }
-    
-    console.log(numberOfNights)
-    console.log(currentListing.regularPrice)
-    console.log(some)
+        let some = 0;
 
-    console.log(pricechange)
 
-  },[formData.dateTo])
-    
-   
+        const one_day = 1000 * 60 * 60 * 24;
+        if (formData.dateForm && formData.dateTo) {
 
-    
-    
+            numberOfNights = Math.ceil((new Date(formData.dateTo) - new Date(formData.dateForm)) / (one_day))
 
-    
+            some = (numberOfNights) * (currentListing.regularPrice)
+            setPricechange(some)
+
+        }
+
+        console.log(numberOfNights)
+        console.log(currentListing.regularPrice)
+        console.log(some)
+
+        console.log(pricechange)
+
+    }, [formData.dateTo])
+
+
+
+
+
+
+
 
 
 
@@ -148,24 +156,24 @@ function Booking() {
                     <div className=' flex flex-col gap-5 '>
                         <h1 className='text-center w-full text-xl font-medium'>Booking Details</h1>
                         <div className='flex  justify-between'>
-                        <div>
                             <div>
-                                <h1 className='text-xl font-medium'>{currentListing.name}</h1>
-                               <p className='flex items-center gap-3' > <FaMapMarkerAlt/> {currentListing.address} </p>
+                                <div>
+                                    <h1 className='text-xl font-medium'>{currentListing.name}</h1>
+                                    <p className='flex items-center gap-3' > <FaMapMarkerAlt /> {currentListing.address} </p>
+                                </div>
+                                <div className='flex gap-5 '>
+                                    <div className='flex items-center gap-4 '> {currentListing.wifi === true ? (<FaWifi className='text-green-700' />) : ("")}</div>
+                                    <div className='flex items-center gap-4'> <FaBed className='text-green-700' /> {currentListing.bedrooms ? (`${currentListing.bedrooms}`) : ('')} </div>
+                                    <div className='flex items-center gap-4'> <FaBath className='text-green-700' /> {currentListing.bathrooms ? (`${currentListing.bathrooms}`) : ('')} </div>
+                                    <div className='flex items-center gap-4 '> {currentListing.parking === true ? (<FaParking className='text-green-700' />) : ("")}</div>
+                                </div>
                             </div>
-                            <div className='flex gap-5 '>
-                                <div className='flex items-center gap-4 '> {currentListing.wifi === true ? (<FaWifi className='text-green-700' />) : ("")}</div>
-                                <div className='flex items-center gap-4'> <FaBed  className='text-green-700' /> {currentListing.bedrooms ? (`${currentListing.bedrooms}`) : ('')} </div>
-                                <div className='flex items-center gap-4'> <FaBath  className='text-green-700' /> {currentListing.bathrooms ? (`${currentListing.bathrooms}`) : ('')} </div>
-                                <div className='flex items-center gap-4 '> {currentListing.parking === true ? (<FaParking className='text-green-700' />) : ("")}</div>
+                            <div className='mt-7'>
+                                <h1 className='text-center '>{currentListing.type === 'rent' ? (`$ ${currentListing.regularPrice} /Day Price`) : (`$ ${currentListing.regularPrice}`)}</h1>
+                                <h1 className='text-center font-medium text-xl'>{currentListing.type === 'rent' ? (` Total : $${pricechange} `) : (`$ ${currentListing.regularPrice}`)}</h1>
+                                {/* <h1 className='text-center font-medium text-xl'>{currentListing.type === 'rent' ?(`$ ${price} /Day`) : (`$ ${currentListing.regularPrice}`)}</h1> */}
+                                {/* todo for change date change price */}
                             </div>
-                        </div>
-                        <div className='mt-7'>
-                            <h1 className='text-center '>{currentListing.type === 'rent' ?(`$ ${currentListing.regularPrice} /Day Price`) : (`$ ${currentListing.regularPrice}`)}</h1>
-                            <h1 className='text-center font-medium text-xl'>{currentListing.type === 'rent' ?(` Total : $${pricechange} `) : (`$ ${currentListing.regularPrice}`)}</h1>
-                            {/* <h1 className='text-center font-medium text-xl'>{currentListing.type === 'rent' ?(`$ ${price} /Day`) : (`$ ${currentListing.regularPrice}`)}</h1> */}
-                            {/* todo for change date change price */}
-                        </div>
                         </div>
 
                     </div>
@@ -193,7 +201,7 @@ function Booking() {
                             <span>To</span>
                             <input type="date" placeholder='Enter Guest Number' id='dateTo' value={formData.dateTo} onChange={handleChange} className='border p-3 rounded-xl' />
                         </div>
-                        <button  className='border p-3 bg-blue-400 font-medium text-xl text-white hover:opacity-75 rounded-2xl'>Book</button> 
+                        <button className='border p-3 bg-blue-400 font-medium text-xl text-white hover:opacity-75 rounded-2xl'>Book</button>
                     </form>
                 </div>
             </div>
