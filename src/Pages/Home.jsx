@@ -156,9 +156,52 @@ function Home() {
     });
   }, [offer]);
 
+
+
+
+  const loadingMessages = [
+    "Preparing your luxury escape...",
+    "Curating hand-picked villas just for you...",
+    "Polishing marble floors and setting the scene...",
+    "Smoothing the sheets and pouring the champagne...",
+    "Lighting the candles for your perfect arrival...",
+    "Finalizing exclusive offers and breathtaking views...",
+    "Unlocking hidden gems across the world...",
+    "Almost there — perfection takes a moment...",
+  ];
+
+
+  const [messageIndex, setMessageIndex] = useState(0);
+
+  // ⏱️ This handles changing messages every 2.5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setMessageIndex((prev) => (prev + 1) % loadingMessages.length);
+    }, 2500);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // 🌟 This is your GSAP animation code
+  // It fades the text in smoothly every time the message changes
+  useEffect(() => {
+    gsap.fromTo(
+      ".loading-text", // target the element with this class
+      { opacity: 0, y: 15 }, // start slightly faded and moved down
+      { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" } // animate in smoothly
+    );
+  }, [messageIndex]); // runs each time the message changes
+
+
+
   return loading ? (
-    <div className="flex items-center justify-center h-screen bg-[#E7EFF9] text-[#1A1F35] font-sans text-xl">
-      Loading....
+    <div className="flex flex-col items-center justify-center h-screen bg-[#E7EFF9] text-[#1A1F35] font-sans text-center">
+      <h1 className="text-2xl md:text-3xl font-light loading-text">
+        {loadingMessages[messageIndex]}
+      </h1>
+      <p className="text-[#2A3B66] text-base font-light italic mt-3">
+        Please sit back while we curate your perfect stay.
+      </p>
     </div>
   ) : (
 
