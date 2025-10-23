@@ -36,7 +36,7 @@ function CreateListing() {
   const navigate = useNavigate()
 
   const handleImageSubmit = async () => {
-    // setUploading(true)
+    setUploading(true)
 
     // e.preventDefault()
 
@@ -68,8 +68,12 @@ function CreateListing() {
         }));
       }
 
+      setUploading(false)
+
+
     } catch (error) {
       console.error("Upload error:", error);
+      setUploading(false)
     }
 
 
