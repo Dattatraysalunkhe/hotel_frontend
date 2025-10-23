@@ -15,6 +15,7 @@ SwiperCore.use([Navigation]);
 gsap.registerPlugin(ScrollTrigger);
 
 function Home() {
+  const [loading, setLoading] = useState(false)
   const [offer, setOffers] = useState([]);
   const [rentListings, setRentListings] = useState([]);
   const { currentUser } = useSelector((state) => state.user);
@@ -24,7 +25,48 @@ function Home() {
   const offersRef = useRef(null);
 
   useEffect(() => {
-    const fetchOfferListings = async () => {
+    // const fetchOfferListings = async () => {
+    //   try {
+    //     // const res = await fetch('/api/listing/get?type=all&limit=6');
+    //     const res = await fetch('/api/listing/get?type=all&limit=6', {
+    //       method: 'GET', // Specify GET method
+    //       headers: {
+    //         'Content-Type': 'application/json', // Optional depending on your API requirements
+    //         'x-api-key': import.meta.env.VITE_API_KEY, // Add your API key here
+    //       },
+    //     })
+
+    //     const data = await res.json();
+    //     setOffers(data);
+    //     fetchRentListings();
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // };
+
+    // const fetchRentListings = async () => {
+    //   try {
+    //     // const res = await fetch('/api/listing/get?type=sale&limit=4');
+    //     const res = await fetch('/api/listing/get?type=sale&limit=4', {
+    //       method: 'GET', // Specify GET method
+    //       headers: {
+    //         'Content-Type': 'application/json', // Optional depending on your API requirements
+    //         'x-api-key': import.meta.env.VITE_API_KEY, // Add your API key here
+    //       },
+    //     })
+    //     const data = await res.json();
+    //     setRentListings(data);
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // };
+
+    // fetchOfferListings();
+
+
+    const fetchData = async () => {
+      setLoading(true)
+
       try {
         // const res = await fetch('/api/listing/get?type=all&limit=6');
         const res = await fetch('/api/listing/get?type=all&limit=6', {
@@ -37,13 +79,11 @@ function Home() {
 
         const data = await res.json();
         setOffers(data);
-        fetchRentListings();
       } catch (error) {
         console.error(error);
+        // setLoading(false)
       }
-    };
 
-    const fetchRentListings = async () => {
       try {
         // const res = await fetch('/api/listing/get?type=sale&limit=4');
         const res = await fetch('/api/listing/get?type=sale&limit=4', {
@@ -55,12 +95,18 @@ function Home() {
         })
         const data = await res.json();
         setRentListings(data);
+        setLoading(false)
       } catch (error) {
         console.error(error);
+        // setLoading(false)
       }
-    };
 
-    fetchOfferListings();
+    }
+
+    fetchData()
+
+
+
   }, []);
 
   // Hero title animation
@@ -110,7 +156,12 @@ function Home() {
     });
   }, [offer]);
 
-  return (
+  return loading ? (
+    <div className="flex items-center justify-center h-screen bg-[#E7EFF9] text-[#1A1F35] font-sans text-xl">
+      Loading....
+    </div>
+  ) : (
+
     <div className="font-sans bg-[#E7EFF9] text-[#1A1F35]">
 
       {/* Hero Section */}
