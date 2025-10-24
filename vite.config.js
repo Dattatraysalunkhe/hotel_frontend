@@ -12,4 +12,13 @@ export default defineConfig({
     },
   },
   plugins: [react()],
+
+   // 👇 Build setup for deployment on Render
+  build: {
+    outDir: 'dist', // make sure Render's publish directory = "dist"
+  },
+
+  // 👇 Ensure public files (like _redirects) are copied to the dist folder
+  publicDir: 'public',
+  
 })
