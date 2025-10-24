@@ -16,7 +16,7 @@ import Hotels from './Pages/Hotels'
 import Booking from './Pages/Booking'
 import BookingsPage from './Pages/BookingsPage'
 import Termsconditions from './Pages/Termsconditions'
-import Privacypolicy from './Pages/privacypolicy'
+import Privacypolicy from './Pages/Privacypolicy'
 
 function App() {
   return (
