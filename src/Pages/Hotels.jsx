@@ -41,10 +41,15 @@ function Hotels() {
 
   }, [])
   return loading ? (
-    <div className="flex flex-col items-center justify-center h-64">
-      <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#00008B] mb-4"></div>
-      <h1 className="text-xl font-semibold text-gray-700">Loading your bookings...</h1>
-      <p className="text-gray-400 text-sm mt-1">Please wait a moment</p>
+    // <div className="flex flex-col items-center justify-center h-64">
+    //   <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#00008B] mb-4"></div>
+    //   <h1 className="text-xl font-semibold text-gray-700">Loading your bookings...</h1>
+    //   <p className="text-gray-400 text-sm mt-1">Please wait a moment</p>
+    // </div>
+
+    <div>
+      <h1 className='text-3xl font-semibold text-center mb-8 text-gray-800'>Oops!</h1>
+      <p className='text-center text-gray-500'>something went wrong try again later</p>
     </div>
 
   ) : (
