@@ -81,6 +81,7 @@ function Home() {
         setOffers(data);
       } catch (error) {
         console.error(error);
+        alert("SkyHotel is momentarily busy processing requests. Please wait a bit and try again.");
         // setLoading(false)
       }
 

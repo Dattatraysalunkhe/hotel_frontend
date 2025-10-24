@@ -64,7 +64,7 @@ function Search() {
             }
             setListings(data);
             setLoading(false);
-            console.log(data)
+            // console.log(data)
           };
       
           fetchListings();

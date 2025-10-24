@@ -26,7 +26,7 @@ function Hotels() {
         setHotelList(data)
         setError(false)
 
-        console.log(data)
+        // console.log(data)
       } catch (error) {
         console.log(error)
         setError(true)

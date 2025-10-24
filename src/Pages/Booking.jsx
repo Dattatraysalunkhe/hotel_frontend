@@ -31,7 +31,7 @@ function Booking() {
     const [pricechange, setPricechange] = useState(formData.price)
     const navigate = useNavigate()
 
-    console.log(params)
+    // console.log(params)
 
 
     useEffect(() => {
@@ -97,7 +97,7 @@ function Booking() {
             setLoading(false);
             if (data.success === false) {
                 setError(data.message);
-                console.log(formData)
+                // console.log(formData)
             }
             navigate('/My/bookings');
         } catch (error) {
@@ -106,8 +106,8 @@ function Booking() {
         }
     }
 
-    console.log(currentListing)
-    console.log(formData)
+    // console.log(currentListing)
+    // console.log(formData)
 
 
 
@@ -129,11 +129,11 @@ function Booking() {
 
         }
 
-        console.log(numberOfNights)
-        console.log(currentListing.regularPrice)
-        console.log(some)
+        // console.log(numberOfNights)
+        // console.log(currentListing.regularPrice)
+        // console.log(some)
 
-        console.log(pricechange)
+        // console.log(pricechange)
 
     }, [formData.dateTo])
 

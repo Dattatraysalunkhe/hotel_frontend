@@ -51,7 +51,7 @@ function UpdateListing() {
                 }
 
                 setFormData(data)
-                 console.log(data)
+                //  console.log(data)
          }
           
          fetchListing();
@@ -100,7 +100,7 @@ function UpdateListing() {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(`Upload is ${progress}% done`);
+          // console.log(`Upload is ${progress}% done`);
         },
         (error) => {
           reject(error)
@@ -178,7 +178,7 @@ function UpdateListing() {
       }
   }
 
-  console.log(formData)
+  // console.log(formData)
 
   return (
     <main className='p-3 max-w-4xl mx-auto'>

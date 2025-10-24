@@ -40,7 +40,7 @@ function CreateListing() {
 
     // e.preventDefault()
 
-    console.log("gfiel uplaoded", file)
+    // console.log("gfiel uplaoded", file)
 
     if (!file) return alert("Please select a file first!");
 
@@ -59,7 +59,7 @@ function CreateListing() {
 
       const data = await res.json();
 
-      console.log("Upload success:", data);
+      // console.log("Upload success:", data);
 
       if (data.data) {
         setFormData((prev) => ({
@@ -96,7 +96,7 @@ function CreateListing() {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(`Upload is ${progress}% done`);
+          // console.log(`Upload is ${progress}% done`);
         },
         (error) => {
           reject(error)
@@ -166,7 +166,7 @@ function CreateListing() {
       setLoading(false);
       if (data.success === false) {
         setError(data.message);
-        console.log(formData)
+        // console.log(formData)
       }
       navigate(`/listing/${data._id}`);
     } catch (error) {
@@ -175,7 +175,7 @@ function CreateListing() {
     }
   }
 
-  console.log(formData)
+  // console.log(formData)
 
   return (
     <main className='p-3 max-w-4xl mx-auto'>
