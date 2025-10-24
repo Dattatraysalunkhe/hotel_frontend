@@ -119,7 +119,7 @@ export default function Listing() {
               {listing.address}
             </p>
             <div className='flex gap-4'>
-              <p className='bg-blue-400 w-full max-w-[200px] text-white text-center p-1 rounded-md font-medium'>
+              <p className='bg-[#00008B] w-full max-w-[200px] text-white text-center p-1 rounded-md font-medium'>
                 {listing.type === 'rent' ? `$ ${listing.regularPrice} / Day ` : 'For Sale'}
               </p>
               {/* {listing.offer && (
@@ -162,31 +162,54 @@ export default function Listing() {
             {
               currentUser ? (
                 <Link className='text-center' to={`/booking/${listing._id}`} >
-                  <button className=' p-4 bg-blue-400 rounded-xl text-white font-medium uppercase hover:opacity-60'>Book Now</button>
+                  <button className=' p-4 bg-[#00008B] rounded-xl text-white font-medium uppercase hover:opacity-60'>Book Now</button>
                 </Link>
               ) : ('')
             }
-            {
-              currentUser ? (
-                <div className='mx-auto  bg-blue-400 p-4 rounded-xl mt-10 text-white'>
-                  <div >
-                    <h5 className='text-center text-2xl font-bold'>Contact Us</h5>
+
+            {currentUser ? (
+              <div className="max-w-2xl mx-auto mt-12 p-6 bg-white rounded-3xl shadow-xl border border-gray-100">
+                <h2 className="text-3xl font-extralight text-gray-800 text-center mb-6 tracking-wide">
+                  Contact Us
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="flex flex-col items-center bg-gray-50 p-5 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <FaMailBulk className="text-blue-500 text-3xl mb-2" />
+                    <span className="font-light text-gray-700">{listing.email}</span>
                   </div>
-                  <div className='flex justify-center gap-3 mt-2 font-bold'>
-                    <div className='flex gap-3 items-center'> <FaMailBulk />:<h1>{listing.email}</h1></div>
-                    <div className='flex gap-3 items-center'> <FaMobile />:<h1>{listing.phonenumber}</h1></div>
-                    <div className='flex gap-3 items-center'> <FaWhatsapp />:<h1>{listing.whatsapp}</h1></div>
+                  <div className="flex flex-col items-center bg-gray-50 p-5 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <FaMobile className="text-green-500 text-3xl mb-2" />
+                    <span className="font-light text-gray-700">{listing.phonenumber}</span>
+                  </div>
+                  <div className="flex flex-col items-center bg-gray-50 p-5 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <FaWhatsapp className="text-green-600 text-3xl mb-2" />
+                    <span className="font-light text-gray-700">{listing.whatsapp}</span>
                   </div>
                 </div>
+              </div>
+            ) : (
+              <div className="max-w-xl mx-auto mt-12 p-8 bg-white rounded-3xl shadow-xl border border-gray-100 text-center">
+                <h3 className="text-3xl font-light text-gray-700 mb-4">
+                  Concierge Access
+                </h3>
+                <p className="text-gray-500 font-light mb-6">
+                  Unlock exclusive details for this luxury property. Sign in to book or connect with our premium concierge service.
+                </p>
 
-              ) : (
+                <Link to="/sign-in">
+                  <button
+                    className="mt-4 text-white font-light px-6 py-3 rounded-full shadow-lg hover:opacity-90 transition-all duration-300"
+                    style={{ backgroundColor: '#00008B' }}
+                  >
+                    Sign In to Book
+                  </button>
+                </Link>
+              </div>
 
-                <div className='text-center mt-14 flex items-center'>
-                  {/* <h3 className='text-xl uppercase text-red-500 font-bold'>please Sign in to See Contact Details</h3> */}
-                  <Link className='text-base ' to={'/sign-in'}> <h3 className='text-xl capitalize text-red-500 font-bold'>please Sign in to See Contact Details...Click Here TO Sign in</h3></Link>
-                </div>
-              )
-            }
+            )}
+
+
+
             {/* {currentUser && listing.userRef !== currentUser._id && !contact && (
               <button
                 onClick={() => setContact(true)}

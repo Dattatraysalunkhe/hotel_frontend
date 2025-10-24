@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 function BookingsPage() {
     const [bookings, setBookings] = useState([])
     const [listings, setListings] = useState({})
     const [loading, setLoading] = useState(true)
+    const [error,setError] = useState(null)
 
     useEffect(() => {
         const fetchBookings = async () => {
@@ -42,6 +44,7 @@ function BookingsPage() {
             } catch (error) {
                 console.log(error)
                 setLoading(false)
+                setError(error)
             }
         }
 
@@ -80,10 +83,22 @@ function BookingsPage() {
         <div className='max-w-screen-lg mx-auto px-4 py-8'>
 
 
-            {bookings.length === 0 ? (
+            { error ? (
                 <div>
                     <h1 className='text-3xl font-semibold text-center mb-8 text-gray-800'>Oops!</h1>
                     <p className='text-center text-gray-500'>something went wrong try again later</p>
+                </div>
+            ) : bookings.length === 0 ? (
+                <div className='text-center'>
+                    <h2 className="text-2xl font-semibold text-gray-800 mb-2">No Bookings Yet</h2>
+                    <p className="text-gray-500 max-w-xs mx-auto">
+                        You haven’t made any bookings yet. Explore our premium hotels and secure your stay with SkyHotel today!
+                    </p>
+                    <Link to={"/Hotels"}>
+                    <button className="mt-6 bg-[#00008B] text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+                        Explore Hotels
+                    </button>
+                    </Link>
                 </div>
             ) : (
                 <div>
