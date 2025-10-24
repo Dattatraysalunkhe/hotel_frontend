@@ -315,7 +315,7 @@ function Home() {
             </p>
             <div
               ref={offersRef}
-              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-20"
             >
               {offer.map(listing => (
                 <div
