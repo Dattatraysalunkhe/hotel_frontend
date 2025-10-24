@@ -5,11 +5,13 @@ function Hotels() {
 
   const [hotellist, setHotelList] = useState([])
   const [error, setError] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
 
     const fetchHotels = async () => {
       setError(false)
+      setLoading(true)
       try {
         // const res = await fetch('/api/listing/get?type:all')
 
@@ -26,6 +28,7 @@ function Hotels() {
         setHotelList(data)
         setError(false)
 
+        setLoading(false)
         // console.log(data)
       } catch (error) {
         console.log(error)
@@ -37,7 +40,14 @@ function Hotels() {
     fetchHotels()
 
   }, [])
-  return (
+  return loading ? (
+    <div className="flex flex-col items-center justify-center h-64">
+      <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#00008B] mb-4"></div>
+      <h1 className="text-xl font-semibold text-gray-700">Loading your bookings...</h1>
+      <p className="text-gray-400 text-sm mt-1">Please wait a moment</p>
+    </div>
+
+  ) : (
     <div className='max max-w-screen-lg mx-auto'>
 
       <div className='max max-w-6xl mx-auto p-3 flex flex-col'>
