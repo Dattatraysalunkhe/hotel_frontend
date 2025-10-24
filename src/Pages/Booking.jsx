@@ -39,7 +39,7 @@ function Booking() {
 
             // const res = await fetch(`/api/listing/get/${params.listingId}`);
 
-            const res = await fetch(`/api/listing/get/${params.listingId}`, {
+            const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/listing/get/${params.listingId}`, {
                 method: 'GET', // Specify GET method
                 headers: {
                     'Content-Type': 'application/json', // Optional depending on your API requirements
@@ -81,7 +81,7 @@ function Booking() {
 
             setLoading(true);
             setError(false);
-            const res = await fetch('/api/booking/create', {
+            const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/booking/create`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

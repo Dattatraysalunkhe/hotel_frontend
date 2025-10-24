@@ -69,7 +69,8 @@ function Home() {
 
       try {
         // const res = await fetch('/api/listing/get?type=all&limit=6');
-        const res = await fetch('/api/listing/get?type=all&limit=6', {
+        // ${import.meta.env.VITE_BACKEND_API}
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/listing/get?type=all&limit=6`, {
           method: 'GET', // Specify GET method
           headers: {
             'Content-Type': 'application/json', // Optional depending on your API requirements
@@ -87,7 +88,7 @@ function Home() {
 
       try {
         // const res = await fetch('/api/listing/get?type=sale&limit=4');
-        const res = await fetch('/api/listing/get?type=sale&limit=4', {
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/listing/get?type=sale&limit=4`, {
           method: 'GET', // Specify GET method
           headers: {
             'Content-Type': 'application/json', // Optional depending on your API requirements

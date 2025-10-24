@@ -48,7 +48,7 @@ function CreateListing() {
     formData.append("file", file);
 
     try {
-      const res = await fetch("/api/listing/fileupload", {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/listing/fileupload`, {
         method: "POST",
         headers: {
           // ❌ don't set 'Content-Type'
@@ -151,7 +151,7 @@ function CreateListing() {
 
       setLoading(true);
       setError(false);
-      const res = await fetch('api/listing/create', {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_API}api/listing/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

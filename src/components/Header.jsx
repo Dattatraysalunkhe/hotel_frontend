@@ -66,7 +66,7 @@ function Header() {
 
   const handleSignOut = async () => {
     dispatch(signoutUserStart());
-    await fetch('/api/auth/signout');
+    await fetch(`${import.meta.env.VITE_BACKEND_API}/api/auth/signout`);
     dispatch(signInSuccess());
     setUserMenuOpen(false);
     navigate('/');

@@ -15,7 +15,7 @@ function Hotels() {
       try {
         // const res = await fetch('/api/listing/get?type:all')
 
-        const res = await fetch('/api/listing/get?type:all', {
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/listing/get?type:all`, {
           method: 'GET', // Specify GET method
           headers: {
             'Content-Type': 'application/json', // Optional depending on your API requirements

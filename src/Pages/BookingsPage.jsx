@@ -10,7 +10,7 @@ function BookingsPage() {
     useEffect(() => {
         const fetchBookings = async () => {
             try {
-                const res = await fetch('/api/booking/booking', {
+                const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/booking/booking`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ function BookingsPage() {
 
                 await Promise.all(
                     uniqueIds.map(async (id) => {
-                        const res = await fetch(`/api/listing/get/${id}`, {
+                        const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/listing/get/${id}`, {
                             headers: {
                                 'Content-Type': 'application/json',
                                 'x-api-key': import.meta.env.VITE_API_KEY,
@@ -56,7 +56,7 @@ function BookingsPage() {
         if (!window.confirm("Are you sure you want to cancel this booking?")) return
 
         try {
-            const res = await fetch(`/api/booking/${bookingId}`, {
+            const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/booking/${bookingId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

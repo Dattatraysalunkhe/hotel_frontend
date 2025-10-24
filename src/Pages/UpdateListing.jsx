@@ -41,7 +41,7 @@ function UpdateListing() {
          const fetchListing = async () => {
                 const listingId = params.listingId
                 
-                const res = await fetch(`/api/listing/get/${listingId}`)
+                const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/listing/get/${listingId}`)
 
                 const data = await res.json()
 
@@ -155,7 +155,7 @@ function UpdateListing() {
        
         setLoading(true);
         setError(false);
-        const res = await fetch(`/api/listing/update/${params.listingId}`, {
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/listing/update/${params.listingId}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -37,7 +37,7 @@ export default function Listing() {
         setLoading(true);
         // const res = await fetch(`/api/listing/get/${params.listingId}`);
 
-        const res = await fetch(`/api/listing/get/${params.listingId}`, {
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/listing/get/${params.listingId}`, {
           method: 'GET', // Specify GET method
           headers: {
             'Content-Type': 'application/json', // Optional depending on your API requirements
