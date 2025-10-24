@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,14 +12,18 @@ export default defineConfig({
       },
     },
   },
-  plugins: [react()],
-
-   // 👇 Build setup for deployment on Render
+  plugins: [
+    react(),
+    // 👇 Ensure _redirects is copied to dist root
+    viteStaticCopy({
+      targets: [
+        { src: 'public/_redirects', dest: '' } // copies to dist/
+      ]
+    })
+  ],
   build: {
-    outDir: 'dist', // make sure Render's publish directory = "dist"
+    outDir: 'dist', // Render publish directory
   },
-
-  // 👇 Ensure public files (like _redirects) are copied to the dist folder
   publicDir: 'public',
-  
+
 })
