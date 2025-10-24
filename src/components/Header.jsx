@@ -76,7 +76,6 @@ function Header() {
     <>
       <style>
         {`
-          /* Glassmorphic styles */
           header.glass-header-active {
             background-color: rgba(255, 255, 255, 0.6) !important;
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1) !important;
@@ -96,9 +95,10 @@ function Header() {
         className="sticky top-0 z-50 border-b border-transparent"
         aria-label="Main site header"
       >
-        <div className="flex justify-between items-center max-w-7xl mx-auto px-4 py-3 font-sans text-sm">
+        <div className="flex flex-wrap justify-between items-center max-w-7xl mx-auto px-4 py-3 font-sans text-sm">
+          
           {/* Logo */}
-          <Link to="/" className="select-none">
+          <Link to="/" className="select-none w-full sm:w-auto text-center sm:text-left mb-2 sm:mb-0">
             <h1 className="text-xl font-light tracking-wide">
               <span className="text-[#00008B] font-semibold">SkyHotel</span>
               <span className="text-gray-700">.com</span>
@@ -108,7 +108,7 @@ function Header() {
           {/* Search */}
           <form
             onSubmit={handleSubmit}
-            className="relative max-w-md w-full"
+            className="relative w-full sm:max-w-md order-last sm:order-none mt-2 sm:mt-0"
             role="search"
             aria-label="Site search"
           >
@@ -130,10 +130,10 @@ function Header() {
           </form>
 
           {/* Navigation */}
-          <nav>
-            <ul className="flex items-center gap-5 text-gray-700 font-light select-none">
+          <nav className="w-full sm:w-auto mt-3 sm:mt-0">
+            <ul className="flex flex-wrap justify-center sm:justify-end items-center gap-3 sm:gap-5 text-gray-700 font-light select-none">
               <li>
-                <Link to="/" className="hover:text-blue-700 transition cursor-pointer ">
+                <Link to="/" className="hover:text-blue-700 transition cursor-pointer">
                   Home
                 </Link>
               </li>
@@ -153,7 +153,6 @@ function Header() {
                 </Link>
               </li>
 
-              {/* Profile / User menu */}
               {currentUser ? (
                 <li className="relative">
                   <button
@@ -163,7 +162,7 @@ function Header() {
                     aria-expanded={userMenuOpen}
                     aria-label="User menu"
                   >
-                    <span className="capitalize">{currentUser.username}</span>
+                    <span className="capitalize hidden sm:inline">{currentUser.username}</span>
                     <FaCaretDown className={`transition-transform ${userMenuOpen ? 'rotate-180' : 'rotate-0'}`} />
                     <img
                       src={currentUser.avatar}
@@ -172,7 +171,6 @@ function Header() {
                     />
                   </button>
 
-                  {/* Dropdown menu */}
                   {userMenuOpen && (
                     <ul
                       className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-lg text-gray-700 font-normal z-50"
