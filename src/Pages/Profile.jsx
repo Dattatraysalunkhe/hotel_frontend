@@ -152,7 +152,7 @@ function Profile() {
  const handleListingDelete = async (listingId) => {
      try {
 
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_API}api/listing/delete/${listingId}`,
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/listing/delete/${listingId}`,
       {
         method: 'DELETE'
       }

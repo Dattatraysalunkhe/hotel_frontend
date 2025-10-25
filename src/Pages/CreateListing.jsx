@@ -152,7 +152,7 @@ function CreateListing() {
 
       setLoading(true);
       setError(false);
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_API}api/listing/create`, {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/listing/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
