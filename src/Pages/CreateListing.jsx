@@ -35,6 +35,33 @@ function CreateListing() {
 
   const navigate = useNavigate()
 
+
+
+  const handleFileChange = (e) => {
+
+    const MAX_FILE_SIZE_MB = 4;
+    const ALLOWED_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+
+    const selected = e.target.files[0];
+    if (!selected) return;
+
+    // ✅ Type check
+    if (!ALLOWED_TYPES.includes(selected.type.toLowerCase())) {
+      alert("Only JPG, JPEG, PNG, and WEBP images are allowed.");
+      e.target.value = "";
+      return;
+    }
+
+    // ✅ Size check
+    if (selected.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+      alert(`File too large! Max size is ${MAX_FILE_SIZE_MB}MB.`);
+      e.target.value = "";
+      return;
+    }
+
+    setFile(selected);
+  };
+
   const handleImageSubmit = async () => {
     setUploading(true)
 
@@ -255,7 +282,16 @@ function CreateListing() {
 
           <p className='font-semibold' >images: <span className='font-normal text-gray-600 ml-2'>First image will be the Cover Image</span></p>
           <div className='flex gap-4'>
-            <input onChange={(e) => { setFile(e.target.files[0]) }} type="file" id='image' accept='image/*' multiple className='p-3 border rounded-lg' />
+            <input
+              // onChange={(e) => { setFile(e.target.files[0]) }}
+              onChange={handleFileChange}
+              type="file"
+              id='image'
+              //  accept='image/*'
+              // multiple
+              accept="image/jpeg, image/jpg, image/png, image/webp"
+              className='p-3 border rounded-lg'
+            />
             <button disabled={uploading} type='button' onClick={handleImageSubmit} className='p-3 text-green-700 border border-green-700 rounded uppercase hover:shadow-lg disabled:opacity-80 '>{uploading ? 'uploading...' : 'Upload'}</button>
 
           </div>

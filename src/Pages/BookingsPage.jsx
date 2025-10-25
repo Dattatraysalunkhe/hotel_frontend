@@ -113,16 +113,18 @@ function BookingsPage() {
                     </div>
                 </div>
             ) : bookings.length === 0 ? (
-                <div className='text-center'>
-                    <h2 className="text-2xl font-semibold text-gray-800 mb-2">No Bookings Yet</h2>
-                    <p className="text-gray-500 max-w-xs mx-auto">
-                        You haven’t made any bookings yet. Explore our premium hotels and secure your stay with SkyHotel today!
-                    </p>
-                    <Link to={"/Hotels"}>
-                        <button className="mt-6 bg-[#00008B] text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
-                            Explore Hotels
-                        </button>
-                    </Link>
+                <div className='h-[75vh] flex justify-center items-center' >
+                    <div className='text-center'>
+                        <h2 className="text-2xl  text-gray-800 font-light mb-2">No Bookings Yet</h2>
+                        <p className="text-gray-500 font-light max-w-xs mx-auto">
+                            You haven’t made any bookings yet. Explore our premium hotels and secure your stay with SkyHotel today!
+                        </p>
+                        <Link to={"/Hotels"}>
+                            <button className="mt-6 bg-[#00008B] text-white font-light px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+                                Explore Hotels
+                            </button>
+                        </Link>
+                    </div>
                 </div>
             ) : (
                 <div>
