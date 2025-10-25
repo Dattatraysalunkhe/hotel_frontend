@@ -83,6 +83,21 @@ function Booking() {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        // Basic validation
+        const { name, guest, email, dateFrom, dateTo, price } = formData;
+
+        if (
+            !name.trim() ||
+            !email.trim() ||
+            !dateFrom ||
+            !dateTo ||
+            guest <= 0 ||
+            price <= 0
+        ) {
+            alert("Please fill all fields correctly before submitting.");
+            return; // stop form submission
+        }
+
         try {
 
             setLoading(true);
