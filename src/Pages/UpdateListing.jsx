@@ -1,61 +1,70 @@
 import React, { useEffect, useState } from 'react'
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
 import { app } from '../firebase'
-import {useSelector} from 'react-redux'
-import {useNavigate ,useParams} from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
 
 function UpdateListing() {
 
   const [files, setFiles] = useState([])
   const [formData, setFormData] = useState({
     imageUrl: [],
-    name:'',
-    description:'',
-    address:'',
-    type:'rent',
-    bedrooms:1,
-    bathrooms:1,
-    regularPrice:0,
-    discountedPrice:0,
-    offer:false,
-    parking:false,
-    furnished:false,
-    wifi:false,
-    email:'',
-    phonenumber:0,
-    whatsapp:0,
+    name: '',
+    description: '',
+    address: '',
+    type: 'rent',
+    bedrooms: 1,
+    bathrooms: 1,
+    regularPrice: 0,
+    discountedPrice: 0,
+    offer: false,
+    parking: false,
+    furnished: false,
+    wifi: false,
+    email: '',
+    phonenumber: 0,
+    whatsapp: 0,
   })
 
   const [imageUploadError, setImageUploadError] = useState(false)
-  const[uploading,setUploading] =useState(false)
-  const[loading,setLoading] = useState(false)
+  const [uploading, setUploading] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false);
 
-  const {currentUser} = useSelector((state) => state.user)
+  const { currentUser } = useSelector((state) => state.user)
 
-  const navigate =useNavigate()
+  const navigate = useNavigate()
 
-  const params =useParams()
+  const params = useParams()
 
   useEffect(() => {
-         const fetchListing = async () => {
-                const listingId = params.listingId
-                
-                const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/listing/get/${listingId}`)
+    const fetchListing = async () => {
+      const listingId = params.listingId
 
-                const data = await res.json()
+      // const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/listing/get/${listingId}`)
 
-                if(data.success === false){
-                  setError(data.message)
-                  return;
-                }
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/listing/get/${listingId}`, {
+        method: 'GET', // Specify GET method
+        headers: {
+          'Content-Type': 'application/json', // Optional depending on your API requirements
+          'x-api-key': import.meta.env.VITE_API_KEY, // Add your API key here
+        },
+        credentials: 'include', // ✅ This tells the browser to send cookies
+      })
 
-                setFormData(data)
-                //  console.log(data)
-         }
-          
-         fetchListing();
-  },[])
+      const data = await res.json()
+
+      if (data.success === false) {
+        setError(data.message)
+        return;
+      }
+
+      setFormData(data)
+      //  console.log(data)
+    }
+
+    fetchListing();
+  }, [])
 
   const handleImageSubmit = (e) => {
     setUploading(true)
@@ -73,14 +82,14 @@ function UpdateListing() {
         setFormData({ ...formData, imageUrl: formData.imageUrl.concat(urls) });
         setImageUploadError(false)
         setUploading(false)
-        
+
       }).catch((error) => {
         setImageUploadError('Upload failed file must be below 2MB')
       })
 
     } else {
       setImageUploadError('You can only upload less than 3 photos')
-      
+
     }
   }
 
@@ -116,67 +125,68 @@ function UpdateListing() {
   }
 
   const handleRemoveImage = (index) => {
-      setFormData({
-        ...formData,
-        imageUrl:formData.imageUrl.filter((_,i)=>
-                  i !== index,
-        )
-      })
+    setFormData({
+      ...formData,
+      imageUrl: formData.imageUrl.filter((_, i) =>
+        i !== index,
+      )
+    })
   }
 
   const handleChange = (e) => {
-    if(e.target.id === 'sale' || e.target.id === 'rent'){
+    if (e.target.id === 'sale' || e.target.id === 'rent') {
       setFormData({
         ...formData,
-        type:e.target.id
+        type: e.target.id
       })
     }
 
-    if(e.target.id === 'parking' || e.target.id === 'furnished' || e.target.id === 'offer' || e.target.id === 'wifi'){
+    if (e.target.id === 'parking' || e.target.id === 'furnished' || e.target.id === 'offer' || e.target.id === 'wifi') {
       setFormData({
         ...formData,
         [e.target.id]: e.target.checked
       })
     }
 
-    if(e.target.type ===  'number' || e.target.type === 'text' || e.target.type === 'textarea' || e.target.type === 'email'){            
+    if (e.target.type === 'number' || e.target.type === 'text' || e.target.type === 'textarea' || e.target.type === 'email') {
       setFormData({
         ...formData,
-        [e.target.id] : e.target.value
+        [e.target.id]: e.target.value
       })                                                                    // here we compare all valueinput 
     }
 
   }
 
   const handleSubmit = async (e) => {
-      e.preventDefault()
+    e.preventDefault()
 
-       try {
-       
-        setLoading(true);
-        setError(false);
-        const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/listing/update/${params.listingId}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            ...formData,
-            userRef: currentUser._id,
-          }),
-          credentials: "include", // ✅ this sends cookies
-        });
-        const data = await res.json();
-        setLoading(false);
-        if (data.success === false) {
-          setError(data.message);
-          console.log(formData)
-        }
-       navigate(`/listing/${data._id}`);
-      } catch (error) {
-        setError(error.message);
-        setLoading(false);
+    try {
+
+      setLoading(true);
+      setError(false);
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/listing/update/${params.listingId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': import.meta.env.VITE_API_KEY,  // Add your API key here
+        },
+        body: JSON.stringify({
+          ...formData,
+          userRef: currentUser._id,
+        }),
+        credentials: "include", // ✅ this sends cookies
+      });
+      const data = await res.json();
+      setLoading(false);
+      if (data.success === false) {
+        setError(data.message);
+        console.log(formData)
       }
+      navigate(`/listing/${data._id}`);
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
   }
 
   // console.log(formData)
@@ -189,12 +199,12 @@ function UpdateListing() {
 
         <div className="flex flex-col gap-4 flex-1">
           <input type="text" placeholder='Property Name' id='name' maxLength={50} minLength={2} required className='border p-2 rounded-lg shadow-md' onChange={handleChange} value={formData.name} />
-         
+
           <textarea type="text" placeholder='Add description' id='description' maxLength={500} minLength={2} required className='border p-2 rounded-lg shadow-md' onChange={handleChange} value={formData.description} />
           <input type="text" placeholder='address' id='address' required className='border p-2 rounded-lg shadow-md' onChange={handleChange} value={formData.address} />
           <input type="email" placeholder='email' id='email' required className='border p-2 rounded-lg shadow-md' value={formData.email} onChange={handleChange} />
-          <input type="number" placeholder='Phone Number' id='phonenumber' required className='border p-2 rounded-lg shadow-md' value={formData.phonenumber} onChange={handleChange}  />
-          <input type="number" placeholder='WhatsNumber' id='whatsapp' required className='border p-2 rounded-lg shadow-md' value={formData.whatsapp} onChange={handleChange}  />
+          <input type="number" placeholder='Phone Number' id='phonenumber' required className='border p-2 rounded-lg shadow-md' value={formData.phonenumber} onChange={handleChange} />
+          <input type="number" placeholder='WhatsNumber' id='whatsapp' required className='border p-2 rounded-lg shadow-md' value={formData.whatsapp} onChange={handleChange} />
 
           <div className='flex gap-6 flex-wrap'>
             <div className='flex gap-2 '>
@@ -214,7 +224,7 @@ function UpdateListing() {
               <span>Parking</span>
             </div>
             <div className='flex gap-2'>
-              <input type="checkbox" id="furnished" className='w-5' onChange={handleChange}  checked={formData.furnished} />
+              <input type="checkbox" id="furnished" className='w-5' onChange={handleChange} checked={formData.furnished} />
               <span>Furnished</span>
             </div>
             <div className='flex gap-2'>
@@ -238,7 +248,7 @@ function UpdateListing() {
                 <span className='text-xs'>($/Month)</span>
               </div>
 
-              <input type="Number" id='regularPrice' required  className='p-2 border shadow-sm rounded-md w-20' onChange={handleChange} value={formData.regularPrice} />
+              <input type="Number" id='regularPrice' required className='p-2 border shadow-sm rounded-md w-20' onChange={handleChange} value={formData.regularPrice} />
             </div>
             <div className="flex gap-2">
               <div className='items-center'>
@@ -246,7 +256,7 @@ function UpdateListing() {
                 <span className='text-xs'>($/Month)</span>
               </div>
 
-              <input type="Number" id='discountedPrice' required  className='p-2 border shadow-sm rounded-md w-20' onChange={handleChange} value={formData.discountedPrice} />
+              <input type="Number" id='discountedPrice' required className='p-2 border shadow-sm rounded-md w-20' onChange={handleChange} value={formData.discountedPrice} />
             </div>
           </div>
 
@@ -275,7 +285,7 @@ function UpdateListing() {
                 />
                 <button
                   type='button'
-                   onClick={() => handleRemoveImage(index)}
+                  onClick={() => handleRemoveImage(index)}
                   className='p-3 text-red-700 rounded-lg uppercase hover:opacity-75'
                 >
                   Delete
@@ -293,7 +303,7 @@ function UpdateListing() {
           </button>
           {error && <p className='text-red-700 text-sm'>{error}</p>}
 
-          
+
 
         </div>
 

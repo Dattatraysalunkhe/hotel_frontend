@@ -70,6 +70,7 @@ function Profile() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'x-api-key': import.meta.env.VITE_API_KEY, // Add your API key here
         },
         body: JSON.stringify(formData),
         credentials: "include", // ✅ this sends cookies
@@ -112,7 +113,15 @@ function Profile() {
     try {
 
       dispatch(signoutUserStart());
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/auth/signout`);
+      // const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/auth/signout`);
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/auth/signout`, {
+        method: 'GET', // Specify GET method
+        headers: {
+          'Content-Type': 'application/json', // Optional depending on your API requirements
+          'x-api-key': import.meta.env.VITE_API_KEY, // Add your API key here
+        },
+        credentials: 'include', // ✅ This tells the browser to send cookies
+      })
       const data = await res.json();
 
       if (data.success === false) {
@@ -132,7 +141,16 @@ function Profile() {
 
       setShowListingError(false)
 
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/user/listings/${currentUser._id}`);
+      // const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/user/listings/${currentUser._id}`);
+
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/user/listings/${currentUser._id}`, {
+        method: 'GET', // Specify GET method
+        headers: {
+          'Content-Type': 'application/json', // Optional depending on your API requirements
+          'x-api-key': import.meta.env.VITE_API_KEY, // Add your API key here
+        },
+        credentials: 'include', // ✅ This tells the browser to send cookies
+      })
 
       const data = await res.json();
 
@@ -149,34 +167,43 @@ function Profile() {
 
   }
 
- const handleListingDelete = async (listingId) => {
-     try {
+  const handleListingDelete = async (listingId) => {
+    try {
 
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/listing/delete/${listingId}`,
-      {
-        method: 'DELETE'
-      }
-      )
+      // const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/listing/delete/${listingId}`,
+      //   {
+      //     method: 'DELETE'
+      //   }
+      // )
+
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/listing/delete/${listingId}`, {
+        method: 'DELETE', // Specify GET method
+        headers: {
+          'Content-Type': 'application/json', // Optional depending on your API requirements
+          'x-api-key': import.meta.env.VITE_API_KEY, // Add your API key here
+        },
+        credentials: 'include', // ✅ This tells the browser to send cookies
+      })
 
       const data = await res.json()
 
-      if(data.success === false){
+      if (data.success === false) {
         // console.log((data.message))
 
         return;
 
       }
 
-      setUserListings((prev) => 
+      setUserListings((prev) =>
 
-      prev.filter((listing) => listing.id !== listingId
-      
-      ))
-      
-     } catch (error) {
+        prev.filter((listing) => listing.id !== listingId
+
+        ))
+
+    } catch (error) {
       console.log(error)
-     }
- }
+    }
+  }
 
 
   return (
@@ -241,7 +268,7 @@ function Profile() {
               <div className="flex gap-2">
                 <button onClick={() => handleListingDelete(listing._id)} className='bg-red-400 p-2 rounded-md'>Delete</button>
                 <Link to={`/update-Listing/${listing._id}`} >
-                <button className='bg-green-400 p-2 rounded-md'>Update</button>
+                  <button className='bg-green-400 p-2 rounded-md'>Update</button>
                 </Link>
               </div>
             </div>

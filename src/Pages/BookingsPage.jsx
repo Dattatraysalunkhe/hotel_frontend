@@ -16,6 +16,7 @@ function BookingsPage() {
                         'Content-Type': 'application/json',
                         'x-api-key': import.meta.env.VITE_API_KEY,
                     },
+                    credentials: 'include', // ✅ This tells the browser to send cookies
                 })
 
                 const data = await res.json()
