@@ -203,8 +203,8 @@ function Home() {
 
 
   return loading ? (
-    <div className="flex flex-col items-center justify-center h-screen bg-[#E7EFF9] text-[#1A1F35] font-sans text-center">
-      <h1 className="text-2xl md:text-3xl font-light loading-text">
+    <div className="flex flex-col items-center justify-center h-[75vh] bg-white text-[#1A1F35] font-sans text-center">
+      <h1 className="text-3xl md:text-3xl font-light loading-text">
         {loadingMessages[messageIndex]}
       </h1>
       <p className="text-[#2A3B66] text-base font-light italic mt-3">
