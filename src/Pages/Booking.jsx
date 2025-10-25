@@ -35,6 +35,12 @@ function Booking() {
 
 
     useEffect(() => {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth", // optional for smooth scrolling
+        });
+
         const fetchlisting = async () => {
 
             // const res = await fetch(`/api/listing/get/${params.listingId}`);

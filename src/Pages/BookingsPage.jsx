@@ -5,9 +5,16 @@ function BookingsPage() {
     const [bookings, setBookings] = useState([])
     const [listings, setListings] = useState({})
     const [loading, setLoading] = useState(true)
-    const [error,setError] = useState(null)
+    const [error, setError] = useState(null)
 
     useEffect(() => {
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth", // optional for smooth scrolling
+        });
+
         const fetchBookings = async () => {
             try {
                 const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/booking/booking`, {
@@ -78,16 +85,32 @@ function BookingsPage() {
         }
     }
 
-    if (loading) return <p className="text-center mt-10">Loading...</p>
+    if (loading) return (
+
+        // <div className='h-[75vh] flex justify-center items-center'>
+        //     <p className="text-center mt-10">Loading...</p>
+        // </div>
+
+        <div className='h-[75vh]  flex justify-center items-center'>
+            <div className="flex flex-col items-center justify-center h-64">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#00008B] mb-4"></div>
+                <h1 className="text-xl font-semibold text-gray-700">Loading your bookings...</h1>
+                <p className="text-gray-400 text-sm mt-1">Please wait a moment</p>
+            </div>
+        </div>
+
+    )
 
     return (
         <div className='max-w-screen-lg mx-auto px-4 py-8'>
 
 
-            { error ? (
-                <div>
-                    <h1 className='text-3xl font-semibold text-center mb-8 text-gray-800'>Oops!</h1>
-                    <p className='text-center text-gray-500'>something went wrong try again later</p>
+            {error ? (
+                <div className='h-[75vh] flex justify-center items-center'>
+                    <div>
+                        <h1 className='text-3xl font-semibold text-center mb-8 text-gray-800'>Oops!</h1>
+                        <p className='text-center text-gray-500'>something went wrong try again later</p>
+                    </div>
                 </div>
             ) : bookings.length === 0 ? (
                 <div className='text-center'>
@@ -96,9 +119,9 @@ function BookingsPage() {
                         You haven’t made any bookings yet. Explore our premium hotels and secure your stay with SkyHotel today!
                     </p>
                     <Link to={"/Hotels"}>
-                    <button className="mt-6 bg-[#00008B] text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
-                        Explore Hotels
-                    </button>
+                        <button className="mt-6 bg-[#00008B] text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+                            Explore Hotels
+                        </button>
                     </Link>
                 </div>
             ) : (

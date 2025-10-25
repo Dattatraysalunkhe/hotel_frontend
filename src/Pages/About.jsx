@@ -1,6 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 function About() {
+
+  useEffect(() => {
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // optional for smooth scrolling
+    });
+
+  }, [])
+
   return (
     <div className="max-w-6xl mx-auto px-6 py-24 min-h-screen">
       <h1 className="text-4xl font-thin text-[#00008B] text-center mb-12">

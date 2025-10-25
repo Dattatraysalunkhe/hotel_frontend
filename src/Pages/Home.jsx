@@ -63,6 +63,12 @@ function Home() {
 
     // fetchOfferListings();
 
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // optional for smooth scrolling
+    });
+
+
 
     const fetchData = async () => {
       setLoading(true)

@@ -9,6 +9,11 @@ function Hotels() {
 
   useEffect(() => {
 
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // optional for smooth scrolling
+    });
+
     const fetchHotels = async () => {
       setError(false)
       setLoading(true)
@@ -33,6 +38,7 @@ function Hotels() {
       } catch (error) {
         console.log(error)
         setError(true)
+        setLoading(false)
       }
 
     }
@@ -40,18 +46,24 @@ function Hotels() {
     fetchHotels()
 
   }, [])
-  return loading ? (
-    // <div className="flex flex-col items-center justify-center h-64">
-    //   <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#00008B] mb-4"></div>
-    //   <h1 className="text-xl font-semibold text-gray-700">Loading your bookings...</h1>
-    //   <p className="text-gray-400 text-sm mt-1">Please wait a moment</p>
-    // </div>
+  return error ? (
 
-    <div>
-      <h1 className='text-3xl font-semibold text-center mb-8 text-gray-800'>Oops!</h1>
-      <p className='text-center text-gray-500'>something went wrong try again later</p>
+
+    <div className='h-[75vh]  flex justify-center items-center'>
+      <div className=''>
+        <h1 className='text-3xl font-semibold text-center mb-8 text-gray-800'>Oops!</h1>
+        <p className='text-center text-gray-500'>something went wrong try again later</p>
+      </div>
     </div>
 
+  ) : loading ? (
+    <div className='h-[75vh]  flex justify-center items-center'>
+      <div className="flex flex-col items-center justify-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#00008B] mb-4"></div>
+        <h1 className="text-xl font-semibold text-gray-700">Loading your bookings...</h1>
+        <p className="text-gray-400 text-sm mt-1">Please wait a moment</p>
+      </div>
+    </div>
   ) : (
     <div className='max max-w-screen-lg mx-auto'>
 

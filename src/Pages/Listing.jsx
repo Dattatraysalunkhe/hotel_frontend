@@ -32,6 +32,12 @@ export default function Listing() {
   const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // optional for smooth scrolling
+    });
+
     const fetchListing = async () => {
       try {
         setLoading(true);

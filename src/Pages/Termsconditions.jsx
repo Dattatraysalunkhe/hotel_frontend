@@ -1,6 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const Termsconditions = () => {
+
+  useEffect(() => {
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // optional for smooth scrolling
+    });
+
+  },[])
+
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-6 sm:px-12 md:px-24 lg:px-48">
       <h1 className="text-4xl font-thin text-[#00008B] mb-8 border-b" style={{ borderColor: '#00008B' }}>
