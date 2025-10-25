@@ -54,7 +54,7 @@ function SignIn() {
       <div className="absolute inset-0"></div>
 
       {/* Form container */}
-      <div className="relative z-10 bg-white bg-opacity-90 rounded-3xl shadow-xl max-w-md w-full p-10 flex flex-col">
+      <div className="relative z-10  bg-white bg-opacity-90 rounded-3xl shadow-xl max-w-md w-[90%] mx-auto p-10 flex flex-col">
         <h1 className="text-3xl font-extralight text-gray-800 mb-10 text-center tracking-wide">
           Welcome Back
         </h1>

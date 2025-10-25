@@ -54,7 +54,7 @@ function SignUp() {
       <div className="absolute inset-0"></div>
 
       {/* Form container with glassmorphism */}
-      <div className="relative z-10 bg-white bg-opacity-90  rounded-3xl shadow-xl max-w-md w-full p-10 flex flex-col">
+      <div className="relative z-10 bg-white bg-opacity-90  rounded-3xl shadow-xl max-w-md w-[90%] mx-auto p-10 flex flex-col">
         <h1 className="text-3xl font-extralight text-black mb-10 text-center tracking-wide drop-shadow-md">
           Create an Account
         </h1>
@@ -65,7 +65,7 @@ function SignUp() {
             id="username"
             placeholder="Username"
             onChange={handleChange}
-            className="border border-gray-300 border-opacity-30 rounded-xl px-4 py-3 text-black placeholder-black placeholder-opacity-70 bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 font-light text-sm shadow-sm"
+            className="border border-gray-300 border-opacity-30 rounded-xl px-4 py-3 text-black placeholder-black placeholder-opacity-70 bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 font-light text-sm shadow-sm bg-white"
             required
           />
           <input
@@ -73,7 +73,7 @@ function SignUp() {
             id="email"
             placeholder="Email"
             onChange={handleChange}
-            className="border border-gray-300 border-opacity-30 rounded-xl px-4 py-3 text-black placeholder-black placeholder-opacity-70 bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 font-light text-sm shadow-sm"
+            className="border border-gray-300 border-opacity-30 rounded-xl px-4 py-3 text-black placeholder-black placeholder-opacity-70 bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 font-light text-sm shadow-sm bg-white"
             required
           />
           <input
@@ -81,7 +81,7 @@ function SignUp() {
             id="password"
             placeholder="Password"
             onChange={handleChange}
-            className="border border-gray-300 border-opacity-30 rounded-xl px-4 py-3 text-black placeholder-black placeholder-opacity-70 bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 font-light text-sm shadow-sm"
+            className="border border-gray-300 border-opacity-30 rounded-xl px-4 py-3 text-black placeholder-black placeholder-opacity-70 bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 font-light text-sm shadow-sm bg-white"
             required
           />
           <button
@@ -93,7 +93,7 @@ function SignUp() {
           </button>
         </form>
 
-        <p className="mt-8 text-center text-white font-light text-sm drop-shadow-md">
+        <p className="mt-8 text-center text-black font-light text-sm drop-shadow-md">
           Already have an account?{' '}
           <Link to="/sign-in" className="text-blue-400 font-medium hover:underline">
             Sign In
