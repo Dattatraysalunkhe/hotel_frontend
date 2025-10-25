@@ -209,7 +209,7 @@ function Booking() {
                             <span>To</span>
                             <input type="date" placeholder='Enter Guest Number' id='dateTo' value={formData.dateTo} onChange={handleChange} className='border p-3 rounded-xl' />
                         </div>
-                        <button className='border p-3 bg-blue-400 font-medium text-xl text-white hover:opacity-75 rounded-2xl'>Book</button>
+                        <button className='border p-3 bg-[#00008B] font-medium text-xl text-white hover:opacity-75 rounded-2xl'>Book</button>
                     </form>
                 </div>
             </div>
