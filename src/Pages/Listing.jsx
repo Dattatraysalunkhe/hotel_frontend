@@ -97,7 +97,10 @@ export default function Listing() {
             {listing.imageUrl.map((url) => (
               <SwiperSlide key={url}>
                 <div
-                  className='h-[400px] w=[400px] mx-96 mt-10 rounded-xl '      //h-[400px] w=[400px] mx-96 mt-10 rounded-3xl
+                  // className='h-[400px] w=[400px] mx-96 mt-10 rounded-xl '      //h-[400px] w=[400px] mx-96 mt-10 rounded-3xl
+
+                  className="w-[90%] mx-auto sm:w-1/4 md:w-2/3 lg:w-[1300px] mx-auto h-64 sm:h-80 md:h-96 lg:h-[500px] mt-10 rounded-2xl shadow-lg overflow-hidden"
+
                   style={{
                     background: `url(${url}) center no-repeat`,
                     backgroundSize: 'cover',
