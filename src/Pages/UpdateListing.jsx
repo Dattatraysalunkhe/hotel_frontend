@@ -6,9 +6,9 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 function UpdateListing() {
 
-  const [files, setFiles] = useState([])
+  const [file, setFile] = useState(null)
   const [formData, setFormData] = useState({
-    imageUrl: [],
+    imageUrl: "",
     name: '',
     description: '',
     address: '',
@@ -66,31 +66,77 @@ function UpdateListing() {
     fetchListing();
   }, [])
 
-  const handleImageSubmit = (e) => {
-    setUploading(true)
-    if (files.length > 0 && files.length + formData.imageUrl.length < 4) {
+  // file code start
 
-      const promises = [];
+  const handleFileChange = (e) => {
 
-      for (let i = 0; i < files.length; i++) {
-        promises.push(
-          storeImage(files[i])
-        )
+    const MAX_FILE_SIZE_MB = 4;
+    const ALLOWED_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+
+    const selected = e.target.files[0];
+    if (!selected) return;
+
+    // ✅ Type check
+    if (!ALLOWED_TYPES.includes(selected.type.toLowerCase())) {
+      alert("Only JPG, JPEG, PNG, and WEBP images are allowed.");
+      e.target.value = "";
+      return;
+    }
+
+    // ✅ Size check
+    if (selected.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+      alert(`File too large! Max size is ${MAX_FILE_SIZE_MB}MB.`);
+      e.target.value = "";
+      return;
+    }
+
+    setFile(selected);
+  };
+
+  const handleImageSubmit = async (e) => {
+
+     setUploading(true)
+
+    // e.preventDefault()
+
+    // console.log("gfiel uplaoded", file)
+
+    if (!file) return alert("Please select a file first!");
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/listing/fileupload`, {
+        method: "POST",
+        headers: {
+          // ❌ don't set 'Content-Type'
+          'x-api-key': import.meta.env.VITE_API_KEY,
+        },
+        body: formData, // ✅ send as FormData
+        credentials: "include", // ✅ this sends cookies
+      });
+
+      const data = await res.json();
+
+      // console.log("Upload success:", data);
+
+      if (data.data) {
+        setFormData((prev) => ({
+          ...prev,
+          imageUrl: data.data, // append new image
+        }));
       }
 
-      Promise.all(promises).then((urls) => {
-        setFormData({ ...formData, imageUrl: formData.imageUrl.concat(urls) });
-        setImageUploadError(false)
-        setUploading(false)
+      setUploading(false)
 
-      }).catch((error) => {
-        setImageUploadError('Upload failed file must be below 2MB')
-      })
 
-    } else {
-      setImageUploadError('You can only upload less than 3 photos')
-
+    } catch (error) {
+      console.error("Upload error:", error);
+      setUploading(false)
     }
+
+   
   }
 
 
@@ -267,12 +313,21 @@ function UpdateListing() {
 
           <p className='font-semibold' >images: <span className='font-normal text-gray-600 ml-2'>First image will be the Cover Image</span></p>
           <div className='flex gap-4'>
-            <input onChange={(e) => { setFiles(e.target.files) }} type="file" id='image' accept='image/*' multiple className='p-3 border rounded-lg' />
+            <input
+              // onChange={(e) => { setFiles(e.target.files) }}
+              // type="file" id='image' accept='image/*'
+              // multiple
+              onChange={handleFileChange}
+              type="file"
+              id='image'
+              accept="image/jpeg, image/jpg, image/png, image/webp"
+              className='p-3 border rounded-lg'
+            />
             <button disabled={uploading} type='button' onClick={handleImageSubmit} className='p-3 text-green-700 border border-green-700 rounded uppercase hover:shadow-lg disabled:opacity-80 '>{uploading ? 'uploading...' : 'Upload'}</button>
 
           </div>
           <p className='text-red-700 text-sm'> {imageUploadError && imageUploadError}</p>
-          {formData.imageUrl.length > 0 &&
+          {/* {formData.imageUrl.length > 0 &&
             formData.imageUrl.map((url, index) => (
               <div
                 key={url}
@@ -291,7 +346,7 @@ function UpdateListing() {
                   Delete
                 </button>
               </div>
-            ))}
+            ))} */}
 
           {/* <button className='p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>{loading ? 'Adding Listing ..' : 'Add Listing'}</button> */}
 
