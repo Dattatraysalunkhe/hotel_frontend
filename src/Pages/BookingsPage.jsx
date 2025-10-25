@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { FaBath, FaBed, FaParking, FaWifi } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
 function BookingsPage() {
@@ -151,10 +152,28 @@ function BookingsPage() {
                                                 />
                                             )}
                                             <div className='flex gap-3 text-gray-700 mb-2'>
-                                                <span className='font-light'>🛏 {hotel.bedrooms} Beds</span>
-                                                <span className='font-light'>🛁 {hotel.bathrooms} Baths</span>
-                                                {hotel.wifi && <span className='font-light'>📶 WiFi</span>}
-                                                {hotel.parking && <span className='font-light'>🅿️ Parking</span>}
+                                                <span className='flex gap-2 justify-center items-center'>
+                                                    <FaBed className='text-lg' />
+                                                    <>
+                                                        {hotel.bedrooms > 1
+                                                            ? `${hotel.bedrooms} beds `
+                                                            : `${hotel.bedrooms} bed `
+                                                        }
+                                                    </>
+
+                                                </span>
+                                                <span className='flex gap-2 justify-center items-center'>
+                                                    <FaBath className='text-lg' />
+                                                    <>
+                                                        {hotel.bathrooms > 1
+                                                            ? `${hotel.bathrooms} baths `
+                                                            : `${hotel.bathrooms} bath `
+                                                        }
+                                                    </>
+
+                                                </span>
+                                               <span className='flex gap-2 justify-center items-center'> {hotel.wifi && <FaWifi className='text-green-500'/>}</span>
+                                               <span className='flex gap-2 justify-center items-center'> {hotel.parking && <FaParking className='text-green-500'/>}</span>
                                             </div>
                                         </div>
                                     )}
