@@ -128,7 +128,7 @@ export default function Listing() {
           )} */}
           <div className='flex flex-col max-w-4xl mx-auto p-12 my-20 gap-9 item  w-full'>
 
-            <p className='text-2xl font-bold text-center'>
+            <p className='text-2xl font-bold font-light text-center'>
               {listing.name} - ${listing.regularPrice}
 
               {/* {listing.offer
@@ -141,7 +141,7 @@ export default function Listing() {
               {listing.address}
             </p>
             <div className='flex gap-4'>
-              <p className='bg-[#00008B] w-full max-w-[200px] text-white text-center p-1 rounded-md font-medium'>
+              <p className='bg-[#00008B] w-full max-w-[200px] text-white font-light   text-center p-1 rounded-md '>
                 {listing.type === 'rent' ? `$ ${listing.regularPrice} / Day ` : 'For Sale'}
               </p>
               {/* {listing.offer && (
@@ -151,8 +151,8 @@ export default function Listing() {
               )} */}
             </div>
             <p className='text-slate-800'>
-              <span className='font-semibold text-black'>Description - </span>
-              {listing.description}
+              <span className='font-light  text-black'>Description - </span>
+             <span className='font-light  text-black' > {listing.description} </span>
             </p>
             <ul className='text-green-900 font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6'>
               <li className='flex items-center gap-1 whitespace-nowrap '>
@@ -184,7 +184,7 @@ export default function Listing() {
             {
               currentUser ? (
                 <Link className='text-center' to={`/booking/${listing._id}`} >
-                  <button className=' p-4 bg-[#00008B] rounded-xl text-white font-medium uppercase hover:opacity-60'>Book Now</button>
+                  <button className=' p-4 bg-[#00008B] rounded-xl text-white font-light uppercase hover:opacity-60'>Book Now</button>
                 </Link>
               ) : ('')
             }
