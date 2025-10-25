@@ -55,6 +55,7 @@ function CreateListing() {
           'x-api-key': import.meta.env.VITE_API_KEY,
         },
         body: formData, // ✅ send as FormData
+        credentials: "include", // ✅ this sends cookies
       });
 
       const data = await res.json();
@@ -161,6 +162,7 @@ function CreateListing() {
           ...formData,
           userRef: currentUser._id,
         }),
+        credentials: "include", // ✅ this sends cookies
       });
       const data = await res.json();
       setLoading(false);

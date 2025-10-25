@@ -164,6 +164,7 @@ function UpdateListing() {
             ...formData,
             userRef: currentUser._id,
           }),
+          credentials: "include", // ✅ this sends cookies
         });
         const data = await res.json();
         setLoading(false);

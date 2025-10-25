@@ -26,6 +26,7 @@ function SignUp() {
           'x-api-key': import.meta.env.VITE_API_KEY,  // Add your API key here
         },
         body: JSON.stringify(formData),
+        credentials: "include", // ✅ this sends cookies
       });
 
       const data = await res.json();

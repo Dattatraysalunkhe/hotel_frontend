@@ -93,6 +93,7 @@ function Booking() {
                     hotelId: params.listingId,
                     price: pricechange
                 }),
+                credentials: "include", // ✅ this sends cookies
             });
             const data = await res.json();
             setLoading(false);

@@ -29,6 +29,7 @@ function SignIn() {
 
         },
         body: JSON.stringify(formData),
+        credentials: "include", // ✅ this sends cookies
       })
 
       const data = await res.json()

@@ -72,6 +72,7 @@ function Profile() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
+        credentials: "include", // ✅ this sends cookies
       });
       const data = await res.json();
       if (data.success === false) {

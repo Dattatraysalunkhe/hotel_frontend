@@ -66,7 +66,16 @@ function Header() {
 
   const handleSignOut = async () => {
     dispatch(signoutUserStart());
-    await fetch(`${import.meta.env.VITE_BACKEND_API}/api/auth/signout`);
+    // await fetch(`${import.meta.env.VITE_BACKEND_API}/api/auth/signout`);
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/auth/signout`, {
+      method: 'GET', // Specify GET method
+      headers: {
+        'Content-Type': 'application/json', // Optional depending on your API requirements
+        'x-api-key': import.meta.env.VITE_API_KEY, // Add your API key here
+      },
+    })
+
+    console.log(res)
     dispatch(signInSuccess());
     setUserMenuOpen(false);
     navigate('/');
@@ -96,7 +105,7 @@ function Header() {
         aria-label="Main site header"
       >
         <div className="flex flex-wrap justify-between items-center max-w-7xl mx-auto px-4 py-3 font-sans text-sm">
-          
+
           {/* Logo */}
           <Link to="/" className="select-none w-full sm:w-auto text-center sm:text-left mb-2 sm:mb-0">
             <h1 className="text-xl font-light tracking-wide">
