@@ -73,6 +73,7 @@ function Header() {
         'Content-Type': 'application/json', // Optional depending on your API requirements
         'x-api-key': import.meta.env.VITE_API_KEY, // Add your API key here
       },
+      credentials: 'include', // ✅ This tells the browser to send cookies
     })
 
     console.log(res)
