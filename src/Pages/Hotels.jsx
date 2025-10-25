@@ -65,7 +65,7 @@ function Hotels() {
       </div>
     </div>
   ) : (
-    <div className='h-[75vh] max max-w-screen-lg mx-auto'>
+    <div className='h-auto max max-w-screen-lg mx-auto'>
 
       <div className='max max-w-6xl mx-auto p-3 flex flex-col'>
         <div className='flex flex-col '>

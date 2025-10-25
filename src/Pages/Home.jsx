@@ -118,51 +118,51 @@ function Home() {
   }, []);
 
   // Hero title animation
-  useEffect(() => {
-    gsap.from(heroTitleRef.current, {
-      y: 60,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out",
-      delay: 0.3,
-    });
-  }, []);
+  // useEffect(() => {
+  //   gsap.from(heroTitleRef.current, {
+  //     y: 60,
+  //     opacity: 0,
+  //     duration: 1,
+  //     ease: "power3.out",
+  //     delay: 0.3,
+  //   });
+  // }, []);
 
   // Listings carousel cards animation
-  useEffect(() => {
-    if (!listingsRef.current) return;
-    const cards = listingsRef.current.querySelectorAll(".animate-card");
-    gsap.from(cards, {
-      y: 40,
-      opacity: 0,
-      scale: 0.95,
-      duration: 0.7,
-      ease: "power3.out",
-      stagger: 0.2,
-      scrollTrigger: {
-        trigger: listingsRef.current,
-        start: "top 85%",
-      },
-    });
-  }, [rentListings]);
+  // useEffect(() => {
+  //   if (!listingsRef.current) return;
+  //   const cards = listingsRef.current.querySelectorAll(".animate-card");
+  //   gsap.from(cards, {
+  //     y: 40,
+  //     opacity: 0,
+  //     scale: 0.95,
+  //     duration: 0.7,
+  //     ease: "power3.out",
+  //     stagger: 0.2,
+  //     scrollTrigger: {
+  //       trigger: listingsRef.current,
+  //       start: "top 85%",
+  //     },
+  //   });
+  // }, [rentListings]);
 
   // Offers grid animation
-  useEffect(() => {
-    if (!offersRef.current) return;
-    const cards = offersRef.current.querySelectorAll(".animate-card");
-    gsap.from(cards, {
-      y: 40,
-      opacity: 0,
-      scale: 0.95,
-      duration: 0.7,
-      ease: "power3.out",
-      stagger: 0.15,
-      scrollTrigger: {
-        trigger: offersRef.current,
-        start: "top 85%",
-      },
-    });
-  }, [offer]);
+  // useEffect(() => {
+  //   if (!offersRef.current) return;
+  //   const cards = offersRef.current.querySelectorAll(".animate-card");
+  //   gsap.from(cards, {
+  //     y: 40,
+  //     opacity: 0,
+  //     scale: 0.95,
+  //     duration: 0.7,
+  //     ease: "power3.out",
+  //     stagger: 0.15,
+  //     scrollTrigger: {
+  //       trigger: offersRef.current,
+  //       start: "top 85%",
+  //     },
+  //   });
+  // }, [offer]);
 
 
 
@@ -182,25 +182,25 @@ function Home() {
   const [messageIndex, setMessageIndex] = useState(0);
 
   // ⏱️ This handles changing messages every 2.5 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setMessageIndex((prev) => (prev + 1) % loadingMessages.length);
-    }, 2500);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setMessageIndex((prev) => (prev + 1) % loadingMessages.length);
+  //   }, 2500);
 
-    return () => clearInterval(interval);
-  }, []);
+  //   return () => clearInterval(interval);
+  // }, []);
 
-  // 🌟 This is your GSAP animation code
-  // It fades the text in smoothly every time the message changes
-  useEffect(() => {
-    gsap.fromTo(
-      ".loading-text", // target the element with this class
-      { opacity: 0, y: 15 }, // start slightly faded and moved down
-      { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" } // animate in smoothly
-    );
-  }, [messageIndex]); // runs each time the message changes
+  // // 🌟 This is your GSAP animation code
+  // // It fades the text in smoothly every time the message changes
+  // useEffect(() => {
+  //   gsap.fromTo(
+  //     ".loading-text", // target the element with this class
+  //     { opacity: 0, y: 15 }, // start slightly faded and moved down
+  //     { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" } // animate in smoothly
+  //   );
+  // }, [messageIndex]); // runs each time the message changes
 
-
+// console.log("hello")
 
   return loading ? (
     <div className="flex flex-col items-center justify-center h-[75vh] bg-white text-[#1A1F35] font-sans text-center">

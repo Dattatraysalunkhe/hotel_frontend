@@ -201,11 +201,11 @@ export default function Listing() {
                   </div>
                   <div className="flex flex-col items-center bg-gray-50 p-5 rounded-2xl shadow-sm hover:shadow-md transition">
                     <FaMobile className="text-green-500 text-3xl mb-2" />
-                    <span className="font-light text-gray-700">{listing.phonenumber}</span>
+                    <span className="font-light text-gray-700">+{listing.phonenumber}</span>
                   </div>
                   <div className="flex flex-col items-center bg-gray-50 p-5 rounded-2xl shadow-sm hover:shadow-md transition">
                     <FaWhatsapp className="text-green-600 text-3xl mb-2" />
-                    <span className="font-light text-gray-700">{listing.whatsapp}</span>
+                    <span className="font-light text-gray-700">+{listing.whatsapp}</span>
                   </div>
                 </div>
               </div>
