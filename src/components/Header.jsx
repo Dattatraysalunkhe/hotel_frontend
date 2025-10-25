@@ -76,7 +76,7 @@ function Header() {
       credentials: 'include', // ✅ This tells the browser to send cookies
     })
 
-    console.log(res)
+    // console.log(res)
     dispatch(signInSuccess());
     setUserMenuOpen(false);
     navigate('/');

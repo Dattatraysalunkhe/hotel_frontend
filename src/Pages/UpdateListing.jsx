@@ -180,7 +180,7 @@ function UpdateListing() {
       setLoading(false);
       if (data.success === false) {
         setError(data.message);
-        console.log(formData)
+        // console.log(formData)
       }
       navigate(`/listing/${data._id}`);
     } catch (error) {
