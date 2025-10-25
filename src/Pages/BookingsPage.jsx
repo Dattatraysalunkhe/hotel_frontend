@@ -94,8 +94,8 @@ function BookingsPage() {
         <div className='h-[75vh]  flex justify-center items-center'>
             <div className="flex flex-col items-center justify-center h-64">
                 <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#00008B] mb-4"></div>
-                <h1 className="text-xl font-semibold text-gray-700">Loading your bookings...</h1>
-                <p className="text-gray-400 text-sm mt-1">Please wait a moment</p>
+                <h1 className="text-xl font-light text-gray-700">Loading your bookings...</h1>
+                <p className="text-gray-400 font-light text-sm mt-1">Please wait a moment</p>
             </div>
         </div>
 
@@ -108,8 +108,8 @@ function BookingsPage() {
             {error ? (
                 <div className='h-[75vh] flex justify-center items-center'>
                     <div>
-                        <h1 className='text-3xl font-semibold text-center mb-8 text-gray-800'>Oops!</h1>
-                        <p className='text-center text-gray-500'>something went wrong try again later</p>
+                        <h1 className='text-3xl font-light text-center mb-8 text-gray-800'>Oops!</h1>
+                        <p className='text-center font-light text-gray-500'>something went wrong try again later</p>
                     </div>
                 </div>
             ) : bookings.length === 0 ? (
@@ -128,7 +128,7 @@ function BookingsPage() {
                 </div>
             ) : (
                 <div>
-                    <h1 className='text-3xl font-semibold text-center mb-8 text-gray-800'>My bookings</h1>
+                    <h1 className='text-3xl font-light text-center mb-8 text-gray-800'>My bookings</h1>
                     <div className='grid md:grid-cols-2 gap-6'>
                         {bookings.map((book) => {
                             const hotel = listings[book.hotelId]
@@ -141,8 +141,8 @@ function BookingsPage() {
                                     {/* Hotel Info */}
                                     {hotel && (
                                         <div className='mb-4'>
-                                            <h2 className='text-xl font-medium text-gray-800'>{hotel.name}</h2>
-                                            <p className='text-gray-600 mb-2'>{hotel.address}</p>
+                                            <h2 className='text-2xl font-light text-gray-800'>{hotel.name}</h2>
+                                            <p className='text-gray-600 font-light text-sm mb-2'>{hotel.address}</p>
                                             {hotel.imageUrl?.[0] && (
                                                 <img
                                                     src={hotel.imageUrl[0]}
@@ -151,10 +151,10 @@ function BookingsPage() {
                                                 />
                                             )}
                                             <div className='flex gap-3 text-gray-700 mb-2'>
-                                                <span>🛏 {hotel.bedrooms} Beds</span>
-                                                <span>🛁 {hotel.bathrooms} Baths</span>
-                                                {hotel.wifi && <span>📶 WiFi</span>}
-                                                {hotel.parking && <span>🅿️ Parking</span>}
+                                                <span className='font-light'>🛏 {hotel.bedrooms} Beds</span>
+                                                <span className='font-light'>🛁 {hotel.bathrooms} Baths</span>
+                                                {hotel.wifi && <span className='font-light'>📶 WiFi</span>}
+                                                {hotel.parking && <span className='font-light'>🅿️ Parking</span>}
                                             </div>
                                         </div>
                                     )}
@@ -162,29 +162,36 @@ function BookingsPage() {
                                     {/* Booking Info */}
                                     <div className='flex flex-col gap-2 text-gray-600'>
                                         <p>
-                                            <span className='font-semibold text-gray-700'>Guest(s): </span>
+                                            <span className='font-light text-gray-700'>Guest(s): </span>
                                             {book.guest}
                                         </p>
                                         <p>
-                                            <span className='font-semibold text-gray-700'>Email: </span>
+                                            <span className='font-light text-gray-700'>Email: </span>
                                             {book.email}
                                         </p>
                                         <p>
-                                            <span className='font-semibold text-gray-700'>Booking Dates: </span>
+                                            <span className='font-light text-gray-700'>Booking Dates: </span>
                                             {book.dateForm} → {book.dateTo}
                                         </p>
                                         <p>
-                                            <span className='font-semibold text-gray-700'>Price: </span>${book.price}
+                                            <span className='font-light text-gray-700'>Price: </span>${book.price}
                                         </p>
                                     </div>
 
                                     <div className='mt-4 flex justify-between items-center'>
-                                        <span className='text-sm text-gray-400'>
+                                        <span className='text-sm font-light text-gray-400'>
                                             Booked on {new Date(book.createdAt).toLocaleDateString()}
                                         </span>
+                                        {/* <button
+                                            onClick={() => handleCancel(book._id)}
+                                            className='bg-gradient-to-r from-purple-500 to-pink-500 text-white px-5 py-2 rounded-full shadow-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 font-light'
+                                            title="Request to cancel your booking"
+                                        >
+                                            Request Cancellation
+                                        </button> */}
                                         <button
                                             onClick={() => handleCancel(book._id)}
-                                            className='bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold px-5 py-2 rounded-full shadow-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300'
+                                            className='bg-[#00008B] text-white px-5 py-2 rounded-full shadow-lg  font-light'
                                             title="Request to cancel your booking"
                                         >
                                             Request Cancellation

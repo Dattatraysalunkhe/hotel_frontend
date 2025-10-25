@@ -84,15 +84,16 @@ function Booking() {
         e.preventDefault()
 
         // Basic validation
-        const { name, guest, email, dateFrom, dateTo, price } = formData;
+        const { name, guest, email, dateForm, dateTo, price } = formData;
+
 
         if (
             !name.trim() ||
             !email.trim() ||
-            !dateFrom ||
+            !dateForm ||
             !dateTo ||
-            guest <= 0 ||
-            price <= 0
+            guest <= 0
+            // price <= 0
         ) {
             alert("Please fill all fields correctly before submitting.");
             return; // stop form submission
@@ -177,12 +178,12 @@ function Booking() {
                 </div> */}
                 <div className='border p-16 mt-16 rounded-2xl bg-transparent shadow-2xl '>
                     <div className=' flex flex-col gap-5 '>
-                        <h1 className='text-center w-full text-xl font-medium'>Booking Details</h1>
+                        <h1 className='text-center w-full text-2xl font-light'>Booking Details</h1>
                         <div className='flex  justify-between'>
                             <div>
                                 <div>
-                                    <h1 className='text-xl font-medium'>{currentListing.name}</h1>
-                                    <p className='flex items-center gap-3' > <FaMapMarkerAlt /> {currentListing.address} </p>
+                                    <h1 className='text-xl font-light'>{currentListing.name}</h1>
+                                    <p className='flex items-center font-light gap-3' > <FaMapMarkerAlt /> {currentListing.address} </p>
                                 </div>
                                 <div className='flex gap-5 '>
                                     <div className='flex items-center gap-4 '> {currentListing.wifi === true ? (<FaWifi className='text-green-700' />) : ("")}</div>
@@ -192,8 +193,8 @@ function Booking() {
                                 </div>
                             </div>
                             <div className='mt-7'>
-                                <h1 className='text-center '>{currentListing.type === 'rent' ? (`$ ${currentListing.regularPrice} /Day Price`) : (`$ ${currentListing.regularPrice}`)}</h1>
-                                <h1 className='text-center font-medium text-xl'>{currentListing.type === 'rent' ? (` Total : $${pricechange} `) : (`$ ${currentListing.regularPrice}`)}</h1>
+                                <h1 className='text-center font-light '>{currentListing.type === 'rent' ? (`$ ${currentListing.regularPrice} /Day Price`) : (`$ ${currentListing.regularPrice}`)}</h1>
+                                <h1 className='text-center font-light text-xl'>{currentListing.type === 'rent' ? (` Total : $${pricechange} `) : (`$ ${currentListing.regularPrice}`)}</h1>
                                 {/* <h1 className='text-center font-medium text-xl'>{currentListing.type === 'rent' ?(`$ ${price} /Day`) : (`$ ${currentListing.regularPrice}`)}</h1> */}
                                 {/* todo for change date change price */}
                             </div>
@@ -201,30 +202,30 @@ function Booking() {
 
                     </div>
                     <div className='mt-8'>
-                        <h1 className='text-center w-full text-xl font-medium'>Booking From</h1>
+                        <h1 className='text-center w-full text-xl font-light'>Booking From</h1>
                     </div>
                     <form onSubmit={handleSubmit} action="" className='flex flex-col gap-3'>
                         <div className='flex flex-col'>
-                            <span>FullName</span>
+                            <span className='font-light'>FullName</span>
                             <input type="text" placeholder='Name' id='name' value={formData.name} onChange={handleChange} className='border p-3 rounded-xl' />
                         </div>
                         <div className='flex flex-col'>
-                            <span>Email</span>
+                            <span className='font-light'>Email</span>
                             <input type="email" placeholder='Enter Email' id='email' value={formData.email} onChange={handleChange} className='border p-3 rounded-xl' />
                         </div>
                         <div className='flex flex-col'>
-                            <span>Guest</span>
+                            <span className='font-light'>Guest</span>
                             <input type="number" placeholder='Enter Guest Number' id='guest' value={formData.guest} onChange={handleChange} className='border p-3 rounded-xl' />
                         </div>
                         <div className='flex flex-col'>
-                            <span>From</span>
+                            <span className='font-light'>From</span>
                             <input type="date" placeholder='Enter Guest Number' id='dateForm' value={formData.dateForm} onChange={handleChange} className='border p-3 rounded-xl' />
                         </div>
                         <div className='flex flex-col'>
-                            <span>To</span>
+                            <span className='font-light'>To</span>
                             <input type="date" placeholder='Enter Guest Number' id='dateTo' value={formData.dateTo} onChange={handleChange} className='border p-3 rounded-xl' />
                         </div>
-                        <button className='border p-3 bg-[#00008B] font-medium text-xl text-white hover:opacity-75 rounded-2xl'>Book</button>
+                        <button className='border p-3 bg-[#00008B] font-ligh text-xl text-white hover:opacity-75 rounded-2xl'>Book</button>
                     </form>
                 </div>
             </div>

@@ -15,12 +15,12 @@ function PropertyList({ listing }) {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           {listing.type === 'rent' && (
-            <span className="absolute top-3 left-3 bg-blue-700 text-white text-xs px-3 py-1 rounded-full uppercase tracking-wide">
+            <span className="absolute top-3 left-3 bg-blue-700 font-light text-white text-xs px-3 py-1 rounded-full uppercase tracking-wide">
               Rent
             </span>
           )}
           {listing.type === 'sale' && (
-            <span className="absolute top-3 left-3 bg-green-700 text-white text-xs px-3 py-1 rounded-full uppercase tracking-wide">
+            <span className="absolute top-3 left-3 bg-green-700 font-light text-white text-xs px-3 py-1 rounded-full uppercase tracking-wide">
               Sale
             </span>
           )}
@@ -29,25 +29,25 @@ function PropertyList({ listing }) {
         {/* Content Section */}
         <div className="p-4 flex flex-col gap-3">
           {/* Hotel Name */}
-          <p className="truncate text-lg font-semibold text-gray-900 tracking-wide group-hover:text-blue-700 transition-colors">
+          <p className="truncate text-lg font-light text-gray-900 tracking-wide group-hover:text-blue-700 transition-colors">
             {listing.name}
           </p>
 
           {/* Address */}
           <div className="flex items-center gap-2 text-gray-500 text-sm">
             <FaMapMarkerAlt className="text-blue-600" />
-            <p className="truncate">{listing.address}</p>
+            <p className="truncate font-light">{listing.address}</p>
           </div>
 
           {/* Features */}
           <div className="flex items-center justify-between text-gray-600 text-sm mt-2">
             <div className="flex items-center gap-1">
               <FaBed className="text-gray-500" />
-              <span>{listing.bedrooms} {listing.bedrooms > 1 ? 'Beds' : 'Bed'}</span>
+              <span className='font-light'>{listing.bedrooms} {listing.bedrooms > 1 ? 'Beds' : 'Bed'}</span>
             </div>
             <div className="flex items-center gap-1">
               <FaBath className="text-gray-500" />
-              <span>{listing.bathrooms} {listing.bathrooms > 1 ? 'Baths' : 'Bath'}</span>
+              <span className='font-light'>{listing.bathrooms} {listing.bathrooms > 1 ? 'Baths' : 'Bath'}</span>
             </div>
             <div className="flex items-center gap-1">
               {listing.wifi && <FaWifi className="text-blue-600" />}
@@ -60,13 +60,13 @@ function PropertyList({ listing }) {
           {/* Price */}
           <div className="mt-3">
             {listing.type === 'rent' && (
-              <p className="text-xl font-semibold text-blue-700">
+              <p className="text-xl font-light text-blue-700">
                 ${listing.regularPrice}
                 <span className="text-sm text-gray-500 font-light"> / night</span>
               </p>
             )}
             {listing.type === 'sale' && (
-              <p className="text-xl font-semibold text-green-700">
+              <p className="text-xl font-light text-green-700">
                 ${listing.regularPrice.toLocaleString()}
               </p>
             )}
